@@ -1,25 +1,25 @@
-﻿using System;
+﻿using InsideAirBnBV5.Data;
+using InsideAirBnBV5.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using InsideAirBnBV5.Models;
-using InsideAirBnBV5.Data;
 
 namespace InsideAirBnBV5.Controllers
 {
-    public class HomeController : Controller
+    public class NeighbourhoodController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public HomeController(ApplicationDbContext context)
+        public NeighbourhoodController(ApplicationDbContext context)
         {
             _context = context;
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Neighbourhoods.First());
         }
 
         public IActionResult Privacy()

@@ -20,10 +20,6 @@ namespace InsideAirBnBV5.Data
         public virtual DbSet<SummaryListings> SummaryListings { get; set; }
         public virtual DbSet<SummaryReviews> SummaryReviews { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-
-        }
 
     }
 }
