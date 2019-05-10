@@ -6,3 +6,63 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<div id='map' style='width: 100vh; height: 100vw;'></div>
+<div id='map'></div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoid2ludGVyY29tbyIsImEiOiJjanZncnFjdTIwYTJwM3ltajlmODQ0bWlpIn0.LbLEHOHfmrzlq6D5kLd1yQ';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v10',
+        zoom: 12,
+        center: [4.888740, 52.381650]
+    });
+
+    map.on('load', function () {
+
+        map.addLayer({
+            'id': 'locations_layer',
+            'type': 'circle',
+            'source': {
+                type: 'vector',
+                url: 'mapbox://wintercomo.cjvi8k8lt03442wlm454lxe46-029u5'
+            },
+            'source-layer': 'listings',
+            'paint': {
+                // make circles larger as the user zooms from z12 to z22
+                'circle-radius': {
+                    'base': 1.75,
+                    'stops': [[12, 2], [22, 180]]
+                },
+                // color circles by ethnicity, using a match expression
+                // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+                //                'circle-color': [
+                //                    'match',
+                //                    ['get', 'ethnicity'],
+                //                    'White', '#fbb03b',
+                //                    'Black', '#223b53',
+                //                    'Hispanic', '#e55e5e',
+                //                    'Asian', '#3bb2d0',
+                ///* other */ '#ccc'
+                //                ]
+            }
+        });
+        // When a click event occurs on a feature in the states layer, open a popup at the
+        // location of the click, with description HTML from its properties.
+        map.on('click', 'locations_layer', function (e) {
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML("<b>" + e.features[0].properties.name+"</b>")
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the states layer.
+        map.on('mouseenter', 'locations_layer', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'locations_layer', function () {
+            map.getCanvas().style.cursor = '';
+        });
+    });
+</script>
