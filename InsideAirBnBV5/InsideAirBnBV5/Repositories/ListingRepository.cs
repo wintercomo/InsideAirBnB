@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace InsideAirBnBV5.Repositories
 {
-    public class NeighbourhoodsRepository : IRepository<Reviews>
+    public class ListingRepository : IRepository<Listings>
     {
         private readonly ApplicationDbContext context;
 
-        public NeighbourhoodsRepository(ApplicationDbContext context)
+        public ListingRepository(ApplicationDbContext context)
         {
             this.context = context;
         }
-        public IEnumerable<Reviews> GetAll()
+        public IEnumerable<Listings> GetAll()
         {
-            return context.Reviews.ToList();
+            return context.Listings.ToList();
         }
 
-        public Reviews GetById(int id)
+        public Listings GetById(int id)
         {
-            return context.Reviews.FirstOrDefault(p => p.Id == id);
+            return context.Listings.FirstOrDefault(p => p.Id == id);
         }
     }
 }

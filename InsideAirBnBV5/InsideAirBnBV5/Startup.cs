@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using InsideAirBnBV5.Models;
+using InsideAirBnBV5.Repositories;
 
 namespace InsideAirBnBV5
 {
@@ -39,6 +40,9 @@ namespace InsideAirBnBV5
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IRepository<Neighbourhoods>, NeighbourhoodRepository>();
+            services.AddScoped<IRepository<Listings>, ListingRepository>();
+            services.AddScoped<IRepository<Reviews>, ReviewsRepository>();
 
             services.AddControllersWithViews()
                 .AddNewtonsoftJson();

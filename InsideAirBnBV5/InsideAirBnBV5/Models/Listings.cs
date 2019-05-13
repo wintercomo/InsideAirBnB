@@ -98,7 +98,7 @@ namespace InsideAirBnBV5.Models
         public int? ReviewScoresLocation { get; set; }
         public int? ReviewScoresValue { get; set; }
         public string RequiresLicense { get; set; }
-        public string License { get; set; }
+        //public string License { get; set; }
         public string JurisdictionNames { get; set; }
         public string InstantBookable { get; set; }
         public string IsBusinessTravelReady { get; set; }

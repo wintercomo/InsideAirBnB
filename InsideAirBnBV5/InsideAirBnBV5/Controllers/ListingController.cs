@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace InsideAirBnBV5.Controllers
 {
-    [Route("neighbourhoods")]
+    [Route("listings")]
     [ApiController]
-    public class NeighbourhoodController : ControllerBase
+    public class ListingController : ControllerBase
     {
-        private readonly IRepository<Neighbourhoods> repository;
+        private readonly IRepository<Listings> repository;
 
-        public NeighbourhoodController(IRepository<Neighbourhoods> repository)
+        public ListingController(IRepository<Listings> repository)
         {
             this.repository = repository;
         }
