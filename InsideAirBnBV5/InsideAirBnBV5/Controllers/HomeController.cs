@@ -19,7 +19,7 @@ namespace InsideAirBnBV5.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Neighbourhoods.ToList());
         }
 
         public IActionResult Privacy()
