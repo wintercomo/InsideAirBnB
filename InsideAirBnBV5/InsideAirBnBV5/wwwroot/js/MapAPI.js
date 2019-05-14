@@ -64,15 +64,14 @@ map.on('load', function () {
             },
             // color circles by ethnicity, using a match expression
             // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
-            //                'circle-color': [
-            //                    'match',
-            //                    ['get', 'ethnicity'],
-            //                    'White', '#fbb03b',
-            //                    'Black', '#223b53',
-            //                    'Hispanic', '#e55e5e',
-            //                    'Asian', '#3bb2d0',
-            ///* other */ '#ccc'
-            //                ]
+                            'circle-color': [
+                                'match',
+                                ['get', 'room_type'],
+                                'Entire home/apt', '#fbb03b',
+                                'Private room', '#223b53',
+                                'Shared room', '#e55e5e',
+            /* other */ '#ccc'
+                            ]
         }
     });
     // When a click event occurs on a feature in the states layer, open a popup at the
@@ -98,3 +97,10 @@ map.on('load', function () {
         }
     });
 });
+window.onload = async function () {
+    console.log("Fetching data.....")
+    const response = await fetch('https://localhost:44388/listings');
+    let responseJson = await response.json();
+    document.getElementById("number_listings_loaded").innerText = responseJson.length + " Listings loaded"
+    console.log("DONE")
+};
