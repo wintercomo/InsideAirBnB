@@ -17,7 +17,7 @@ namespace InsideAirBnBV5.Repositories
         }
         public IEnumerable<Listings> GetAll()
         {
-            return context.Listings.ToList();
+            return context.Listings;
         }
 
         public Listings GetById(int id)

@@ -23,8 +23,8 @@ namespace InsideAirBnBV5.Controllers
         {
             HomeViewModel viewModel = new HomeViewModel()
             {
-                neighbourhoods = _context.Neighbourhoods.ToList(),
-                listings = _context.Listings.ToList()
+                neighbourhoods = _context.Neighbourhoods,
+                listings = _context.SummaryListings
             };
             return View(viewModel);
         }

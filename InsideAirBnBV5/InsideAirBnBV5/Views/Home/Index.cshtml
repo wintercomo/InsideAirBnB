@@ -7,17 +7,13 @@
     var geoJsonString = @"{
         'type': 'FeatureCollection',
         'features': [";
-    var i = 0;
-    foreach (var item in Model.listings)
+    foreach (var item in Model.listings.Take(1000).ToList())
     {
-        if (i == 100)
-        {
-            break;
-        }
-        i++;
         var longitude = item.Longitude.ToString().Insert(1, ".");
         var latitude = item.Latitude.ToString().Insert(2, ".");
+        System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("/[^a-zA-Z0-9]/");
         var name = item.Name.ToString();
+        string cleanName = regex.Replace(name, "");
         geoJsonString += @"{
             'type': 'Feature',
             'geometry': {
@@ -28,7 +24,7 @@
             'host_name': '" +item.HostName + @"',
             'id': '" +item.Id + @"',
             'calculated_host_listings_count' : '" +item.CalculatedHostListingsCount + @"',
-            'name' : 'NameBUgged',
+            'name' : 'Name Bugged',
             'neighbourhood' : '" +item.Neighbourhood + @"',
             'room_type' : '" +item.RoomType + @"',
             'price' : '" +item.Price + @"',
@@ -48,7 +44,7 @@
 <div class="map-container" style="height: 100vh">
     <div id='map' style="height:100%;width: 80%; float: left"></div>
     <fieldset>
-        <input id='feature-filter' type='text' placeholder='asdasd' />
+        <input id='feature_filter' type='text' placeholder='asdasd' value="179" />
     </fieldset>
     <div id='feature-listing' class='listing'></div>
     <nav id='filter-group' class='filter-group'></nav>
@@ -57,9 +53,9 @@
             <div class="header_left">
                 <h3 id="filter_value">Amsterdam</h3>
                 <label for="map_filter">Filter by:</label><br />
-                <select id="map_filter" onchange="changedFilter();">
+                <select id="map_filter">
                     <option value="Amsterdam">Amsterdam</option>
-                    <optgroup label="Neighbourhoods">
+                    <optgroup label="neighbourhood">
                         @foreach (var item in Model.neighbourhoods)
                         {
                             <option value="@item.Neighbourhood">@item.Neighbourhood</option>
@@ -80,7 +76,13 @@
     </div>
 </div>
 <script>
-    mapboxgl.accessToken = 'pk.eyJ1Ijoid2ludGVyY29tbyIsImEiOiJjanZncnFjdTIwYTJwM3ltajlmODQ0bWlpIn0.LbLEHOHfmrzlq6D5kLd1yQ';
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // your code here
+        
+
+        function AddMap() {
+            mapboxgl.accessToken = 'pk.eyJ1Ijoid2ludGVyY29tbyIsImEiOiJjanZncnFjdTIwYTJwM3ltajlmODQ0bWlpIn0.LbLEHOHfmrzlq6D5kLd1yQ';
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/light-v10',
@@ -123,7 +125,11 @@
                 .addTo(map);
     };
     console.log(@Html.Raw(geoJsonString));
-    
+    document.getElementById("map_filter").addEventListener("change", () => {
+        document.getElementById("filter_value").innerText = document.getElementById("map_filter").value
+        var label = $('#map_filter :selected').parent().attr('label');
+        map.setFilter('locations_layer', ["==", label, document.getElementById("map_filter").value]);
+        }); 
     map.on('load', function () {
 
         map.addLayer({
@@ -133,6 +139,7 @@
                 "type": "geojson",
                 "data": @Html.Raw(geoJsonString)
             },
+            "filter": ["==", "price", document.getElementById("feature_filter").value],
             'paint': {
                 // color circles by ethnicity, using a match expression
                 // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
@@ -146,6 +153,7 @@
                 ]
             }
         });
+        //map.setFilter('locations_layer', ["==", "price", "69"]);
         map.on('click', 'locations_layer', function (e) {
                 clicked = !clicked;
                 generatePopUp(e);
@@ -167,4 +175,8 @@
             }
         });
     });
+        }
+        AddMap();
+}, false);
+
 </script>

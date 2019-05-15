@@ -10,7 +10,7 @@ namespace InsideAirBnBV5.Controllers
 {
     [Route("listings")]
     [ApiController]
-    public class ListingController : ControllerBase
+    public class ListingController : Controller
     {
         private readonly IRepository<Listings> repository;
 
@@ -19,9 +19,9 @@ namespace InsideAirBnBV5.Controllers
             this.repository = repository;
         }
         [HttpGet]
-        public IActionResult GetAllProducts()
+        public IActionResult Index()
         {
-            return Ok(repository.GetAll());
+            return View(repository.GetAll());
         }
 
         [HttpGet("{id}")]
