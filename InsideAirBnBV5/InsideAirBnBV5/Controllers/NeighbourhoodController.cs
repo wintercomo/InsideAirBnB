@@ -1,4 +1,5 @@
 ﻿using InsideAirBnBV5.Models;
+using InsideAirBnBV5.Models.Viewmodels;
 using InsideAirBnBV5.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,8 +10,7 @@ using System.Threading.Tasks;
 namespace InsideAirBnBV5.Controllers
 {
     [Route("neighbourhoods")]
-    [ApiController]
-    public class NeighbourhoodController : ControllerBase
+    public class NeighbourhoodController : Controller
     {
         private readonly IRepository<Neighbourhoods> repository;
 
@@ -19,9 +19,10 @@ namespace InsideAirBnBV5.Controllers
             this.repository = repository;
         }
         [HttpGet]
-        public IActionResult GetAllProducts()
+        public IActionResult Index()
         {
-            return Ok(repository.GetAll());
+            NeighbourhoodsViewModel viewModel = new NeighbourhoodsViewModel() { neighbourhoods = repository.GetAll() };
+            return View(viewModel);
         }
 
         [HttpGet("{id}")]

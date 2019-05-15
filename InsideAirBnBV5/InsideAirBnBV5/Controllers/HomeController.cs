@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InsideAirBnBV5.Models;
 using InsideAirBnBV5.Data;
+using InsideAirBnBV5.Repositories;
 
 namespace InsideAirBnBV5.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        public IRepository<NeighbourhoodRepository> neighbourhoodRepository { get; set; }
 
         public HomeController(ApplicationDbContext context)
         {
@@ -19,7 +21,12 @@ namespace InsideAirBnBV5.Controllers
         }
         public IActionResult Index()
         {
-            return View(_context.Neighbourhoods.ToList());
+            HomeViewModel viewModel = new HomeViewModel()
+            {
+                neighbourhoods = _context.Neighbourhoods.ToList(),
+                listings = _context.Listings.ToList()
+            };
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
