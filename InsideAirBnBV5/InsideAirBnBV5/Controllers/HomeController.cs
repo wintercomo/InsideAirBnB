@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using InsideAirBnBV5.Models;
 using InsideAirBnBV5.Data;
 using InsideAirBnBV5.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InsideAirBnBV5.Controllers
 {

@@ -3,7 +3,6 @@
     ViewData["Title"] = "Home Page";
 }
 @{
-
     var geoJsonString = @"{
         'type': 'FeatureCollection',
         'features': [";
@@ -131,15 +130,41 @@
         map.setFilter('locations_layer', ["==", label, document.getElementById("map_filter").value]);
         }); 
     map.on('load', function () {
-
-        map.addLayer({
+map.addLayer({
+        'id': 'locations_layer',
+        'type': 'circle',
+        'source': {
+            type: 'vector',
+            url: 'mapbox://wintercomo.cjvi8k8lt03442wlm454lxe46-029u5'
+        },
+        'source-layer': 'listings',
+            //"filter": ["==", "room_type", "Entire home/apt"], could use this to create layers for neighbourhoods
+        'paint': {
+            // make circles larger as the user zooms from z12 to z22
+            'circle-radius': {
+                'base': 1,
+                'stops': [[12, 2], [22, 180]]
+            },
+            // color circles by ethnicity, using a match expression
+            // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+            'circle-color': [
+                'match',
+                ['get', 'room_type'],
+                'Entire home/apt', '#fbb03b',
+                'Private room', '#223b53',
+                'Shared room', '#e55e5e',
+            /* other */ '#ccc'
+            ]
+        }
+    });
+        @*map.addLayer({
             "id": "locations_layer",
             "type": "circle",
             "source": {
                 "type": "geojson",
                 "data": @Html.Raw(geoJsonString)
             },
-            "filter": ["==", "price", document.getElementById("feature_filter").value],
+            //"filter": ["==", "price", document.getElementById("feature_filter").value],
             'paint': {
                 // color circles by ethnicity, using a match expression
                 // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
@@ -152,7 +177,7 @@
         /* other */ '#ccc'
                 ]
             }
-        });
+        });*@
         //map.setFilter('locations_layer', ["==", "price", "69"]);
         map.on('click', 'locations_layer', function (e) {
                 clicked = !clicked;
