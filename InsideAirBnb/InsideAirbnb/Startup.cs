@@ -29,6 +29,7 @@ namespace InsideAirbnb
             });
             services.AddTransient<IRepository<Neighbourhoods>, NeighbourhoodRepository>();
             services.AddTransient<IRepository<Listings>, ListingRepository>();
+            services.AddTransient<IRepository<SummaryListings>, SummaryListingReposity>();
             services.AddDbContext<insideAirBnbV2Context>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

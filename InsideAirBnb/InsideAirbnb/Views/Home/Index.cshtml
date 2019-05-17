@@ -95,38 +95,7 @@
                 "type": "circle",
                 "source": {
                     "type": "geojson",
-                    "data": {
-                        'type': 'FeatureCollection',
-                        'features': [
-                            @{ 
-                                var geo = "";
-                                Model.listings.Take(100).ToList().ForEach(item =>
-                                {
-                                    geo += @"{
-                                        'type': 'Feature',
-                                        'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [" + Html.Raw(item.Longitude.ToString().Insert(1, ".")) + ", " + Html.Raw(item.Latitude.ToString().Insert(2, ".")) + @"]
-                                        },
-                                        'properties': {
-                                        'host_name': '" + Html.Raw(item.HostName) + @"',
-                                        'id': '" + Html.Raw(item.Id) + @"',
-                                        'calculated_host_listings_count' : '" + Html.Raw(item.CalculatedHostListingsCount) + @"',
-                                        'name' : 'Name Bugged',
-                                        'neighbourhood' : '" + Html.Raw(item.Neighbourhood) + @"',
-                                        'room_type' : '" + Html.Raw(item.RoomType) + @"',
-                                        'price' : '" + Html.Raw(item.Price) + @"',
-                                        'minimum_nights' : '" + Html.Raw(item.MinimumNights) + @"',
-                                        'reviews_per_month' : '" + Html.Raw(item.ReviewsPerMonth) + @"',
-                                        'number_of_reviews' : '" + Html.Raw(item.NumberOfReviews) + @"',
-                                        'last_review' : '" + Html.Raw(item.LastReview) + @"',
-                                        'availability_365' : '" + Html.Raw(item.Availability365) + @"',
-                                    }},";
-                                });
-                             }
-                            @Html.Raw(geo)
-                        ],
-                    },
+                    "data": '/sum',
                 },
                 'paint': {
                     // color circles by ethnicity, using a match expression
