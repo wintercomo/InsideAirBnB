@@ -90,8 +90,11 @@
                 ]
             }
         });
+        map.on('sourcedata', () => {
+            var features = map.queryRenderedFeatures({ layers: ['locations_layer'] })
+            document.getElementById("number_listings_loaded").innerText = features.length + " listings loaded"
+        });
         //map.setFilter('locations_layer', [">", "price", 100]);
-
         map.addControl(new mapboxgl.NavigationControl());
         map.on('click', 'locations_layer', function (e) {
             clicked = !clicked;
