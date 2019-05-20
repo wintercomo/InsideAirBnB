@@ -41,7 +41,7 @@ namespace InsideAirbnb.Controllers
                             host_name = item.HostName,
                             id = item.Id,
                             calculated_host_listings_count = item.CalculatedHostListingsCount,
-                            name = "Name bugged",
+                            name = "'"+item.Name+"'",
                             neighbourhood = item.Neighbourhood,
                             room_type = item.RoomType,
                             price = item.Price,
