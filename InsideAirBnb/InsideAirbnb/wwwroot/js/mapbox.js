@@ -35,7 +35,7 @@
                 "<div class='listingSectionSubhead'><p id='occupancy_rate'>(INSERT) occupancy rate (est.)</p> " +
                 "<p id='reviews_per_month'>" + e.features[0].properties.reviews_per_month + " reviews per month</p> " +
                 "<p id='number_of_reviews'>" + e.features[0].properties.number_of_reviews + " reviews</p> " +
-                "<p id='last_review'> last " + e.features[0].properties.last_review + " <br></p></div> " +
+                "<p id='last_review'> last review on " + e.features[0].properties.last_review + " <br></p></div> " +
                 "<p id='availability'>(INSERT) availability</p> " +
                 "<sub id='availability_365'>" + e.features[0].properties.availability_365 + "days/year(PERCENTAGE%)</sub>  <br>" +
                 "<sub>click listing on map to 'pin' details</sub> " +
@@ -43,11 +43,15 @@
             .addTo(map);
     };
     document.getElementById("map_filter").addEventListener("change", () => {
-        document.getElementById("filter_value").innerText = document.getElementById("map_filter").value
+        //document.getElementById("filter_value").innerText = document.getElementById("map_filter").value
         var label = $('#map_filter :selected').parent().attr('label');
         var selectedValue = document.getElementById("map_filter").value;
         var filterBy = "=="
         switch (label) {
+            case "review rating":
+                filterBy = "<=";
+                selectedValue = parseInt(selectedValue)
+                break;
             case "price":
                 if (selectedValue == "1000+") {
                     selectedValue = selectedValue.slice(0, selectedValue.length - 1);
@@ -57,9 +61,13 @@
                 }
                 selectedValue = parseInt(selectedValue)
                 break;
+            case undefined:
+                map.setFilter('locations_layer', null);
+                return;
             default:
                 break;
         }
+        console.log("Passed swirch")
         map.setFilter('locations_layer', [filterBy, label, selectedValue]);
     });
     map.on('load', function () {
@@ -68,7 +76,7 @@
             "type": "circle",
             "source": {
                 "type": "geojson",
-                "data": '/sum',
+                "data": '/listings',
             },
             'paint': {
                 // color circles by ethnicity, using a match expression
