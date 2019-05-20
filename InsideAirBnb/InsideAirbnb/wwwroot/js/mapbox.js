@@ -51,6 +51,7 @@
             case "review rating":
                 filterBy = "<=";
                 selectedValue = parseInt(selectedValue)
+                label = "review_rating"
                 break;
             case "price":
                 if (selectedValue == "1000+") {
@@ -61,10 +62,8 @@
                 }
                 selectedValue = parseInt(selectedValue)
                 break;
-            case undefined:
-                map.setFilter('locations_layer', null);
-                return;
             default:
+                map.setFilter('locations_layer', null);
                 break;
         }
         console.log("Passed swirch")
