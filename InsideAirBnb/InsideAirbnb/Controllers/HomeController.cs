@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace InsideAirbnb.Controllers
@@ -44,7 +45,14 @@ namespace InsideAirbnb.Controllers
         {
             return View();
         }
-
+        [Authorize]
+        public IActionResult Claims()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            return View(claims);
+        }
+        
         [Authorize]
         public IActionResult Secure()
         {

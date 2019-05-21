@@ -75,7 +75,7 @@
             "type": "circle",
             "source": {
                 "type": "geojson",
-                "data": '/listings',
+                "data": '/sum',
             },
             'paint': {
                 // color circles by ethnicity, using a match expression

@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using IdentityServer.Models;
+using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace IdentityServerAspNetIdentity.Controllers
 {
@@ -25,11 +27,15 @@ namespace IdentityServerAspNetIdentity.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Username };
+                var user = new ApplicationUser { UserName = model.Username, Role = "TEST", IsAdmin = true };
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddClaimsAsync(user, new List<Claim>
+                    {
+                        new Claim("user_status", "Admin")
+                    });
                     System.Console.WriteLine("SUCESSSS!!");
                     return RedirectToAction("Index", "Home");
                 }
