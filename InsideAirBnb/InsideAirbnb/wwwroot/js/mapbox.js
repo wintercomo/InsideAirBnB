@@ -2,7 +2,7 @@
     mapboxgl.accessToken = 'pk.eyJ1Ijoid2ludGVyY29tbyIsImEiOiJjanZncnFjdTIwYTJwM3ltajlmODQ0bWlpIn0.LbLEHOHfmrzlq6D5kLd1yQ';
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/light-v10',
+        style: 'mapbox://styles/wintercomo/cjvz2001z0wl51cox3kaalny4',
         center: [4.893, 52.373],
         zoom: 12,
         maxZoom: 15,
@@ -55,11 +55,13 @@
         var label = $('#map_filter :selected').parent().attr('label');
         var selectedValue = document.getElementById("map_filter").value;
         var filterBy = "=="
+        let mapFilters = ["all"];
         switch (label) {
             case "review rating":
                 filterBy = "<=";
                 selectedValue = parseInt(selectedValue)
                 label = "review_rating"
+                mapFilters.push([filterBy, label, selectedValue])
                 break;
             case "price":
                 if (selectedValue == "1000+") {
@@ -69,14 +71,15 @@
                     filterBy = "<="
                 }
                 selectedValue = parseInt(selectedValue)
+                mapFilters.push([filterBy, label, selectedValue])
                 break;
             case undefined:
                 console.log(label)
-                map.setFilter('locations_layer', null);
-                return;
+                break;
+            default:
+                mapFilters.push([filterBy, label, selectedValue])
+                break;
         }
-        let mapFilters = ["all"];
-        mapFilters.push([filterBy, label, selectedValue])
         if (FilterApertmentsCheckbox.checked) {
             mapFilters.push(["==", "room_type", "Entire home/apt"]);
         } 
@@ -98,16 +101,21 @@
                 'circle-color': [
                     'match',
                     ['get', 'room_type'],
-                    'Entire home/apt', '#fbb03b',
-                    'Private room', '#223b53',
-                    'Shared room', '#e55e5e',
+                    'Entire home/apt', '#ec5242',
+                    'Private room', '#3fb211',
+                    'Shared room', '#00bff3',
             /* other */ '#ccc'
                 ]
             }
         });
         map.on('sourcedata', () => {
             var features = map.queryRenderedFeatures({ layers: ['locations_layer'] })
+            var amountApartments = features.filter(feature => feature.properties.room_type == "Entire home/apt")
+            var apartmentsPercentage = parseInt((amountApartments.length / features.length) * 100);
+            console.log((amountApartments.length / features.length) * 100);
             document.getElementById("number_listings_loaded").innerText = features.length;
+            document.getElementById("EntireHomeCount").innerText = amountApartments.length + " (" + apartmentsPercentage + "%)";
+            document.getElementById("entireHomeApartmentsPercentage").innerText = apartmentsPercentage + "%";
         });
         //map.setFilter('locations_layer', [">", "price", 100]);
         map.addControl(new mapboxgl.NavigationControl());

@@ -5,8 +5,8 @@
 @section Scripts {
     <script src="~/js/mapbox.js" asp-append-version="true"></script>
 }
-<div class="map-container row" style="height: 100%">
-    <div id='map' class="col-md-8"></div>
+<div class="map-container row" style="height: 100vh">
+    <div id='map' style="height:calc(100%)" class="col-md-8"></div>
     <div id='feature-listing' class='listing'></div>
     <nav id='filter-group' class='filter-group'></nav>
     <div class="map-sidebar col-md-4">
@@ -79,7 +79,7 @@
             <div class="col-md-4">
                 <div class="row" style="text-align: right">
                     <div class="col-md-12">
-                        <span>(COUNT) (%%)</span>
+                        <span id="entireHomeApartmentsPercentage">NNN (%%)</span>
                     </div>
                     <p style="font-size:12px;">Entire homes/apartments</p>
                 </div>
@@ -88,6 +88,12 @@
                         <span>PRICE</span>
                     </div>
                     <p style="font-size:12px;">price/night</p>
+                </div>
+                <div class="row" style="text-align: right">
+                    <div class="col-md-12">
+                        <span id="EntireHomeCount">(COUNT) (%%)</span>
+                    </div>
+                    <p style="font-size:12px;">Entire homes/apartments</p>
                 </div>
                 <div class="row" style="text-align: right">
                     <div class="col-md-12">

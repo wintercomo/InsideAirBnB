@@ -23,11 +23,6 @@ namespace InsideAirbnb.Controllers
             this.repository = repository;
             this.listingsRepo = listingsRepo;
         }
-        public void GetReview_rating(int id)
-        {
-            var wantedItem = listingsRepo.GetById(2818).ReviewScoresRating;
-            //return wantedItem.ReviewScoresRating;
-        }
         [Route("/test")]
         [HttpGet]
         public IActionResult Test()
@@ -40,7 +35,7 @@ namespace InsideAirbnb.Controllers
             var geo = new
             {
                 type = "FeatureCollection",
-                features = repository.GetAll().Select(item =>
+                features = repository.GetAll().Take(1000).Select(item =>
                 {
                     var fullItem = listingsRepo.GetById(item.Id);
                     return new
