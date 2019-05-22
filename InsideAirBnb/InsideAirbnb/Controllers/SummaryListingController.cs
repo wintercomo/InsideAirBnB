@@ -42,6 +42,7 @@ namespace InsideAirbnb.Controllers
                 type = "FeatureCollection",
                 features = repository.GetAll().Select(item =>
                 {
+                    var fullItem = listingsRepo.GetById(item.Id);
                     return new
                     {
                         type = "Feature",
@@ -64,12 +65,11 @@ namespace InsideAirbnb.Controllers
                             number_of_reviews = item.NumberOfReviews,
                             last_review = item.LastReview,
                             availability_365 = item.Availability365,
-                            //review_rating = listingsRepo.GetById(1).ReviewScoresRating,
+                            review_rating = fullItem.ReviewScoresRating !=null ? fullItem.ReviewScoresRating : 0,
                         },
                     };
                 })
             };
-            //object sharedRooms = JsonConvert.DeserializeObject(geo);
             return Ok(geo);
         }
 
