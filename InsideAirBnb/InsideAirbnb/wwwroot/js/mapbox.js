@@ -42,8 +42,16 @@
                 "</div > ")
             .addTo(map);
     };
+    // Event listeners
+    var FilterApertmentsCheckbox = document.querySelector("input[name=filterApertmentsOnly]");
+    FilterApertmentsCheckbox.addEventListener('change', function () {
+        setMapFilter();
+    });
     document.getElementById("map_filter").addEventListener("change", () => {
-        //document.getElementById("filter_value").innerText = document.getElementById("map_filter").value
+        setMapFilter();
+    });
+    //end event listeners
+    function setMapFilter() {
         var label = $('#map_filter :selected').parent().attr('label');
         var selectedValue = document.getElementById("map_filter").value;
         var filterBy = "=="
@@ -62,13 +70,20 @@
                 }
                 selectedValue = parseInt(selectedValue)
                 break;
-            default:
+            case undefined:
+                console.log(label)
                 map.setFilter('locations_layer', null);
-                break;
+                return;
         }
-        console.log("Passed swirch")
-        map.setFilter('locations_layer', [filterBy, label, selectedValue]);
-    });
+        let mapFilters = ["all"];
+        mapFilters.push([filterBy, label, selectedValue])
+        if (FilterApertmentsCheckbox.checked) {
+            mapFilters.push(["==", "room_type", "Entire home/apt"]);
+        } 
+        console.log(mapFilters)
+        map.setFilter('locations_layer', mapFilters);
+    }
+    
     map.on('load', function () {
         map.addLayer({
             "id": "locations_layer",
@@ -92,7 +107,7 @@
         });
         map.on('sourcedata', () => {
             var features = map.queryRenderedFeatures({ layers: ['locations_layer'] })
-            document.getElementById("number_listings_loaded").innerText = features.length + " listings loaded"
+            document.getElementById("number_listings_loaded").innerText = features.length;
         });
         //map.setFilter('locations_layer', [">", "price", 100]);
         map.addControl(new mapboxgl.NavigationControl());
