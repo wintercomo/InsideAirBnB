@@ -4,6 +4,7 @@
 }
 @section Scripts {
     <script src="~/js/mapbox.js" asp-append-version="true"></script>
+    <script src="~/js/Charts.js" asp-append-version="true"></script>
 }
 <div class="map-container row" style="height: 100vh">
     <div id='map' style="height:calc(100%)" class="col-md-8"></div>
@@ -56,66 +57,93 @@
             <div class="col-md-6">
                 <b>Room Type</b>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" style="text-align: right;">
                 <label for="apartmentFilterCheckbox" style="font-size:10px">
                     Only entire homes/apartments
                     <input id="apartmentFilterCheckbox" type="checkbox" name="filterApertmentsOnly" style="float:left" />
                 </label>
             </div>
         </div>
-        <hr />
-        <div class="row">
+        <hr style="margin:0px" />
+        <div class="row" style="margin-right:3px;">
             <div class="col-md-4">
                 <p>
                     Airbnb hosts can list entire homes/apartments, private or shared rooms.
                     Depending on the room type, <a href="#">availability</a>, and <a href="#">activity</a>, an airbnb listing could be more like a hotel, disruptive for neighbours, taking away housing, and <a href="#">illigal</a>.
                 </p>
             </div>
-            <div class="col-md-4">
-                <p>
-                    INSERT GRAPH HERE
-                </p>
+            <div class="col-md-6 chart-container" style="position: relative; height:40vh; width:80vw;">
+                <canvas id="myChart"></canvas>
             </div>
-            <div class="col-md-4">
-                <div class="row" style="text-align: right">
-                    <div class="col-md-12">
-                        <span id="entireHomeApartmentsPercentage">NNN (%%)</span>
-                    </div>
-                    <p style="font-size:12px;">Entire homes/apartments</p>
+            <div class="col-md-2">
+                <div class="col-md-12">
+                <span id="entireHomeApartmentsPercentage">NNN (%%)</span>
                 </div>
-                <div class="row" style="text-align: right">
-                    <div class="col-md-12">
-                        <span>PRICE</span>
-                    </div>
-                    <p style="font-size:12px;">price/night</p>
+                <p style="font-size:12px;text-align: right;">Entire homes/apartments</p>
+                <div class="col-md-12">
+                <span id="priceTagApertments">PRICE</span>
                 </div>
-                <div class="row" style="text-align: right">
-                    <div class="col-md-12">
-                        <span id="EntireHomeCount">(COUNT) (%%)</span>
-                    </div>
-                    <p style="font-size:12px;">Entire homes/apartments</p>
+                <p style="font-size:12px;text-align: right;">price/night</p>
+                <div class="col-md-12">
+                <span id="EntireHomeCount">(COUNT) (%%)</span>
                 </div>
-                <div class="row" style="text-align: right">
-                    <div class="col-md-12">
-                        <span>(COUNT) (%%)</span>
-                    </div>
-                    <p style="font-size:12px;">private rooms</p>
+                <p style="font-size:12px;text-align: right;">Entire homes/apartments</p>
+                <div class="col-md-12">
+                <span id="privateRoomCount">(COUNT) (%%)</span>
                 </div>
-                <div class="row" style="text-align: right">
-                    <div class="col-md-12">
-                        <span>(COUNT) (%%)</span>
-                    </div>
-                    <p style="font-size:12px;">shared rooms</p>
+                <p style="font-size:12px;text-align: right;">private rooms</p>
+                <div class="col-md-12">
+                <span id="sharedRoomsCount">(COUNT) (%%)</span>
                 </div>
+                <p style="font-size:12px;text-align: right;">shared rooms</p>
             </div>
         </div>
-        <br />
-        @* 
-            End graph section right side 
+        @*
+            End graph section right side
             Start Activity Tab
         *@
         <div class="row">
-
+            <div class="col-md-6">
+                <b>Activity</b>
+            </div>
+            <div class="col-md-6" style="text-align: right;">
+                <label for="apartmentFilterCheckbox" style="font-size:10px">
+                    Only <b>recent </b>and <b>frequently </b>booked.
+                    <input id="activeFilterCheckbox" type="checkbox" name="activeFilterCheckbox" style="float:left" />
+                </label>
+            </div>
+        </div>
+        <div class="row" style="margin-right:3px;">
+            <hr style="margin:0px" />
+            <div class="col-md-10">
+                <p>Airbnb guests may leave a review after their stay, and these can be used as an indicator of airbnb activity.</p>
+                <p>The minimum stay, price and number of reviews have been used to estimate the occupancy rate, the number of nights per year and the income per month for each listing.</p>
+                <p>How does the income from Airbnb compare to a long-term lease?</p>
+                <p>Do the number of nights booked per year make it impossible for a listing to be used for residential housing?</p>
+                <p>And what is renting to a tourist full-time rather than a resident doing to our neighbourhoods and cities?</p>
+            </div>
+            <div class="col-md-2">
+                <div class="col-md-12">
+                    <span id="entireHomeApartmentsPercentage">NNN (%%)</span>
+                </div>
+                <p style="font-size:12px;text-align: right;">estimated nights/year</p>
+                <div class="col-md-12">
+                    <span id="">PRICE</span>
+                </div>
+                <p style="font-size:12px;text-align: right;">reviews/listing/month</p>
+                <div class="col-md-12">
+                    <span id="">(COUNT) (%%)</span>
+                </div>
+                <p style="font-size:12px;text-align: right;">reviews</p>
+                <div class="col-md-12">
+                    <span id="">(COUNT) (%%)</span>
+                </div>
+                <p style="font-size:12px;text-align: right;">estimated occupancy</p>
+                <div class="col-md-12">
+                    <span id="">(COUNT) (%%)</span>
+                </div>
+                <p style="font-size:12px;text-align: right;">estimated income/month</p>
+            </div>
         </div>
     </div>
 </div>

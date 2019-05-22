@@ -7947,3 +7947,211 @@ The statement has been terminated.
 2019-05-22 13:26:09.273 +02:00 [DBG] Consent Return Url Parameter: returnUrl
 2019-05-22 13:26:09.273 +02:00 [DBG] Error Url: /home/error
 2019-05-22 13:26:09.273 +02:00 [DBG] Error Id Parameter: errorId
+2019-05-22 14:20:01.031 +02:00 [INF] Starting IdentityServer4 version 3.0.0.0
+2019-05-22 14:20:01.105 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-05-22 14:20:01.117 +02:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2019-05-22 14:20:01.118 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for authentication
+2019-05-22 14:20:01.118 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-in
+2019-05-22 14:20:01.118 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-out
+2019-05-22 14:20:01.118 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for challenge
+2019-05-22 14:20:01.118 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for forbid
+2019-05-22 14:20:01.813 +02:00 [DBG] Login Url: /Account/Login
+2019-05-22 14:20:01.815 +02:00 [DBG] Login Return Url Parameter: ReturnUrl
+2019-05-22 14:20:01.815 +02:00 [DBG] Logout Url: /Account/Logout
+2019-05-22 14:20:01.815 +02:00 [DBG] ConsentUrl Url: /consent
+2019-05-22 14:20:01.816 +02:00 [DBG] Consent Return Url Parameter: returnUrl
+2019-05-22 14:20:01.816 +02:00 [DBG] Error Url: /home/error
+2019-05-22 14:20:01.816 +02:00 [DBG] Error Id Parameter: errorId
+2019-05-22 14:20:12.515 +02:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2019-05-22 14:20:13.763 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2019-05-22 14:20:13.764 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-05-22 14:20:13.774 +02:00 [DBG] Start discovery request
+2019-05-22 14:20:14.190 +02:00 [DBG] Request path /.well-known/openid-configuration/jwks matched to endpoint type Discovery
+2019-05-22 14:20:14.193 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryKeyEndpoint
+2019-05-22 14:20:14.193 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2019-05-22 14:20:14.197 +02:00 [DBG] Start key discovery request
+2019-05-22 14:20:14.315 +02:00 [DBG] Request path /connect/authorize matched to endpoint type Authorize
+2019-05-22 14:20:14.322 +02:00 [DBG] Endpoint enabled: Authorize, successfully created handler: IdentityServer4.Endpoints.AuthorizeEndpoint
+2019-05-22 14:20:14.322 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.AuthorizeEndpoint for /connect/authorize
+2019-05-22 14:20:14.327 +02:00 [DBG] Start authorize request
+2019-05-22 14:20:14.342 +02:00 [DBG] No user present in authorize request
+2019-05-22 14:20:14.352 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:20:14.380 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:20:14.443 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:20:14.481 +02:00 [INF] ValidatedAuthorizeRequest
+{"ClientId":"mvc","ClientName":"MVC Client","RedirectUri":"https://localhost:44307/signin-oidc","AllowedRedirectUris":["https://localhost:44307/signin-oidc"],"SubjectId":"anonymous","ResponseType":"id_token","ResponseMode":"form_post","GrantType":"implicit","RequestedScopes":"openid profile","State":"CfDJ8NnD0EVUvbpElyCe3ShGXDUE8FyVgfBagC9XDpo92D6HZ_vAeVQxjZCA6ANBsg7RBJXOoI3j5Mqyol0bL3fWvjxpvisgxEGHJMEtwHM3C2CHsI9cPctNp7ASSoOo5bM6VMrJVWVEHPfE0OxUz1f0MKElmhIeeQbaMKngSYgepr-MIZ3Pm9QAYy3uJNdjELdJ-6lFLDDZleY2sbw0IpRDAMjMIjC6_heSxh01OsOhKkwopinxQgqv434XZmkQYtSX7qDMzok4OCAGNXFu2-O5NTIzx4B_bypV5h7Nd3dmaCOiEGZ2BvhvMiP2hhIefoyn2Q","UiLocales":null,"Nonce":"636941244142790478.OTRiOTM2NjktYzZjOC00ZmM5LTkwMjctYzRjMjJjYmQ2ZGNiNGI4M2U4OGItZjlkMi00MGY0LTk5YjgtNjcxNzNhNGI4NGQw","AuthenticationContextReferenceClasses":null,"DisplayMode":null,"PromptMode":null,"MaxAge":null,"LoginHint":null,"SessionId":null,"Raw":{"client_id":"mvc","redirect_uri":"https://localhost:44307/signin-oidc","response_type":"id_token","scope":"openid profile","response_mode":"form_post","nonce":"636941244142790478.OTRiOTM2NjktYzZjOC00ZmM5LTkwMjctYzRjMjJjYmQ2ZGNiNGI4M2U4OGItZjlkMi00MGY0LTk5YjgtNjcxNzNhNGI4NGQw","state":"CfDJ8NnD0EVUvbpElyCe3ShGXDUE8FyVgfBagC9XDpo92D6HZ_vAeVQxjZCA6ANBsg7RBJXOoI3j5Mqyol0bL3fWvjxpvisgxEGHJMEtwHM3C2CHsI9cPctNp7ASSoOo5bM6VMrJVWVEHPfE0OxUz1f0MKElmhIeeQbaMKngSYgepr-MIZ3Pm9QAYy3uJNdjELdJ-6lFLDDZleY2sbw0IpRDAMjMIjC6_heSxh01OsOhKkwopinxQgqv434XZmkQYtSX7qDMzok4OCAGNXFu2-O5NTIzx4B_bypV5h7Nd3dmaCOiEGZ2BvhvMiP2hhIefoyn2Q","x-client-SKU":"ID_NETSTANDARD2_0","x-client-ver":"5.3.0.0"},"$type":"AuthorizeRequestValidationLog"}
+2019-05-22 14:20:14.529 +02:00 [INF] Showing login: User is not authenticated
+2019-05-22 14:20:14.716 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:20:14.717 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:20:14.717 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:20:14.721 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:20:36.734 +02:00 [WRN] User 89e8301a-b1bc-4055-a293-174d059285fb password validation failed: PasswordTooShort;PasswordRequiresNonAlphanumeric;PasswordRequiresDigit;PasswordRequiresUpper.
+2019-05-22 14:20:56.733 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:20:56.734 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:20:56.736 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:20:56.736 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:20:59.997 +02:00 [DBG] Request path /connect/authorize matched to endpoint type Authorize
+2019-05-22 14:20:59.998 +02:00 [DBG] Endpoint enabled: Authorize, successfully created handler: IdentityServer4.Endpoints.AuthorizeEndpoint
+2019-05-22 14:20:59.999 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.AuthorizeEndpoint for /connect/authorize
+2019-05-22 14:20:59.999 +02:00 [DBG] Start authorize request
+2019-05-22 14:20:59.999 +02:00 [DBG] No user present in authorize request
+2019-05-22 14:20:59.999 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:20:59.999 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:00.000 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:00.000 +02:00 [INF] ValidatedAuthorizeRequest
+{"ClientId":"mvc","ClientName":"MVC Client","RedirectUri":"https://localhost:44307/signin-oidc","AllowedRedirectUris":["https://localhost:44307/signin-oidc"],"SubjectId":"anonymous","ResponseType":"id_token","ResponseMode":"form_post","GrantType":"implicit","RequestedScopes":"openid profile","State":"CfDJ8NnD0EVUvbpElyCe3ShGXDV4zGLzrE4BzdIH_gADAune6m9WzG649hf61TOMon9JQgV7XRVbW51qR4tUjOXsViHp2lRC-j5n-xYeOFMnshpp6wxYOLkyTkyK4_7ijft-z9A8KoleUVHY8J4T_9rTvONuliMBHS1NEzctg5273iGWwyJ-3I8pwCqytORD1TBjIYEVoJL974BWi2rHueH67LSSi2dMkdQEGEHGpAF1mBbo0eWWCcr25ci-SKIM8jsgalx_bZqDM7ZIZu22lpNzNVFamv_lYpiH4xc34c3qAjTwGOAH0Souxktn4QcxgJRB5A","UiLocales":null,"Nonce":"636941244599850240.NmExMThjOGMtMjllMi00YmU4LThmODUtY2Y1ZmJiOTZkYjlhYTc5NWQ1YWItODE5NS00MTQzLTg0MDMtZThkYTVmZDg4NzQy","AuthenticationContextReferenceClasses":null,"DisplayMode":null,"PromptMode":null,"MaxAge":null,"LoginHint":null,"SessionId":null,"Raw":{"client_id":"mvc","redirect_uri":"https://localhost:44307/signin-oidc","response_type":"id_token","scope":"openid profile","response_mode":"form_post","nonce":"636941244599850240.NmExMThjOGMtMjllMi00YmU4LThmODUtY2Y1ZmJiOTZkYjlhYTc5NWQ1YWItODE5NS00MTQzLTg0MDMtZThkYTVmZDg4NzQy","state":"CfDJ8NnD0EVUvbpElyCe3ShGXDV4zGLzrE4BzdIH_gADAune6m9WzG649hf61TOMon9JQgV7XRVbW51qR4tUjOXsViHp2lRC-j5n-xYeOFMnshpp6wxYOLkyTkyK4_7ijft-z9A8KoleUVHY8J4T_9rTvONuliMBHS1NEzctg5273iGWwyJ-3I8pwCqytORD1TBjIYEVoJL974BWi2rHueH67LSSi2dMkdQEGEHGpAF1mBbo0eWWCcr25ci-SKIM8jsgalx_bZqDM7ZIZu22lpNzNVFamv_lYpiH4xc34c3qAjTwGOAH0Souxktn4QcxgJRB5A","x-client-SKU":"ID_NETSTANDARD2_0","x-client-ver":"5.3.0.0"},"$type":"AuthorizeRequestValidationLog"}
+2019-05-22 14:21:00.001 +02:00 [INF] Showing login: User is not authenticated
+2019-05-22 14:21:00.073 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:00.073 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:00.074 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:00.075 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:03.034 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:21:03.086 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:03.086 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:03.087 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:05.070 +02:00 [INF] {"Username":"ssd","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800001f6-0002-f500-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:21:05.0000000Z","ProcessId":8064,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:21:05.072 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:05.072 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:05.072 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:05.072 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:07.480 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:21:07.520 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:07.521 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:07.522 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:07.677 +02:00 [INF] {"Username":"ssd","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800001f7-0002-f500-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:21:07.0000000Z","ProcessId":8064,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:21:07.678 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:07.678 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:07.678 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:07.678 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:09.013 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:21:09.044 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:09.045 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:09.045 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:09.101 +02:00 [INF] {"Username":"ssd","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800001f8-0002-f500-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:21:09.0000000Z","ProcessId":8064,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:21:09.101 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:09.101 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:09.102 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:09.102 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:10.835 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:21:10.871 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:10.871 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:10.872 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:10.924 +02:00 [INF] {"Username":"ssd","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800001f9-0002-f500-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:21:10.0000000Z","ProcessId":8064,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:21:10.925 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:10.925 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:10.926 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:10.926 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:12.366 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:21:12.397 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:12.397 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:12.397 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:12.444 +02:00 [INF] {"Username":"ssd","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800001fa-0002-f500-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:21:12.0000000Z","ProcessId":8064,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:21:12.444 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:12.445 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:12.445 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:12.446 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:16.290 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:21:16.323 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:16.323 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:16.326 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:16.373 +02:00 [INF] {"Username":"ssd","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800001fb-0002-f500-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:21:16.0000000Z","ProcessId":8064,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:21:16.373 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:16.374 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:16.375 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:16.375 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:17.363 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:21:17.400 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:17.400 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:17.400 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:17.446 +02:00 [INF] {"Username":"ssd","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800001fc-0002-f500-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:21:17.0000000Z","ProcessId":8064,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:21:17.447 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 14:21:17.447 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:21:17.447 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 14:21:17.447 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 14:22:05.213 +02:00 [INF] Starting IdentityServer4 version 3.0.0.0
+2019-05-22 14:22:05.261 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-05-22 14:22:05.267 +02:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2019-05-22 14:22:05.268 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for authentication
+2019-05-22 14:22:05.268 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-in
+2019-05-22 14:22:05.268 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-out
+2019-05-22 14:22:05.268 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for challenge
+2019-05-22 14:22:05.268 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for forbid
+2019-05-22 14:22:05.387 +02:00 [DBG] Login Url: /Account/Login
+2019-05-22 14:22:05.388 +02:00 [DBG] Login Return Url Parameter: ReturnUrl
+2019-05-22 14:22:05.389 +02:00 [DBG] Logout Url: /Account/Logout
+2019-05-22 14:22:05.389 +02:00 [DBG] ConsentUrl Url: /consent
+2019-05-22 14:22:05.389 +02:00 [DBG] Consent Return Url Parameter: returnUrl
+2019-05-22 14:22:05.389 +02:00 [DBG] Error Url: /home/error
+2019-05-22 14:22:05.389 +02:00 [DBG] Error Id Parameter: errorId
+2019-05-22 14:22:11.994 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2019-05-22 14:22:19.937 +02:00 [INF] {"Username":"chrisbuter","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"80000135-0002-fb00-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:22:19.0000000Z","ProcessId":19260,"LocalIpAddress":"127.0.0.1:5000","RemoteIpAddress":"127.0.0.1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:22:22.574 +02:00 [INF] {"Username":"chrisbuter","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"80000136-0002-fb00-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:22:22.0000000Z","ProcessId":19260,"LocalIpAddress":"127.0.0.1:5000","RemoteIpAddress":"127.0.0.1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:22:26.009 +02:00 [INF] {"Username":"chrisbuter","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"80000137-0002-fb00-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:22:26.0000000Z","ProcessId":19260,"LocalIpAddress":"127.0.0.1:5000","RemoteIpAddress":"127.0.0.1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:22:28.044 +02:00 [INF] {"Username":"chrisbuter","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"80000138-0002-fb00-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:22:28.0000000Z","ProcessId":19260,"LocalIpAddress":"127.0.0.1:5000","RemoteIpAddress":"127.0.0.1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:22:29.592 +02:00 [INF] {"Username":"chrisbuter","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"80000139-0002-fb00-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:22:29.0000000Z","ProcessId":19260,"LocalIpAddress":"127.0.0.1:5000","RemoteIpAddress":"127.0.0.1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:22:31.172 +02:00 [INF] {"Username":"chrisbuter","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"8000013a-0002-fb00-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:22:31.0000000Z","ProcessId":19260,"LocalIpAddress":"127.0.0.1:5000","RemoteIpAddress":"127.0.0.1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:22:37.570 +02:00 [WRN] User 069f155b-3efb-4231-b9a3-39ffd2856a48 password validation failed: PasswordTooShort;PasswordRequiresNonAlphanumeric;PasswordRequiresLower;PasswordRequiresUpper;PasswordRequiresUniqueChars.
+2019-05-22 14:25:45.939 +02:00 [INF] Starting IdentityServer4 version 3.0.0.0
+2019-05-22 14:25:45.985 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-05-22 14:25:45.993 +02:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2019-05-22 14:25:45.993 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for authentication
+2019-05-22 14:25:45.993 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-in
+2019-05-22 14:25:45.994 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-out
+2019-05-22 14:25:45.994 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for challenge
+2019-05-22 14:25:45.994 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for forbid
+2019-05-22 14:25:46.105 +02:00 [DBG] Login Url: /Account/Login
+2019-05-22 14:25:46.107 +02:00 [DBG] Login Return Url Parameter: ReturnUrl
+2019-05-22 14:25:46.107 +02:00 [DBG] Logout Url: /Account/Logout
+2019-05-22 14:25:46.107 +02:00 [DBG] ConsentUrl Url: /consent
+2019-05-22 14:25:46.108 +02:00 [DBG] Consent Return Url Parameter: returnUrl
+2019-05-22 14:25:46.108 +02:00 [DBG] Error Url: /home/error
+2019-05-22 14:25:46.108 +02:00 [DBG] Error Id Parameter: errorId
+2019-05-22 14:25:51.762 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2019-05-22 14:25:56.872 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:25:58.348 +02:00 [INF] {"Username":"asdasda","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800000d2-0002-f600-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:25:58.0000000Z","ProcessId":21572,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:25:59.997 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:26:00.097 +02:00 [INF] {"Username":"asdasda","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800000d3-0002-f600-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:26:00.0000000Z","ProcessId":21572,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:26:01.581 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:26:01.613 +02:00 [INF] {"Username":"asdasda","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800000d4-0002-f600-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:26:01.0000000Z","ProcessId":21572,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:26:02.909 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:26:02.917 +02:00 [INF] {"Username":"asdasda","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800000d5-0002-f600-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:26:02.0000000Z","ProcessId":21572,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:26:03.968 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:26:03.976 +02:00 [INF] {"Username":"asdasda","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800000d6-0002-f600-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:26:03.0000000Z","ProcessId":21572,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:26:05.216 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:26:05.223 +02:00 [INF] {"Username":"asdasda","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800000d7-0002-f600-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:26:05.0000000Z","ProcessId":21572,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:26:40.753 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:26:40.884 +02:00 [WRN] Invalid password for user 759f959e-83b0-486d-af27-4e02cddff551.
+2019-05-22 14:26:40.885 +02:00 [WRN] User 759f959e-83b0-486d-af27-4e02cddff551 failed to provide the correct password.
+2019-05-22 14:26:41.107 +02:00 [INF] {"Username":"busthemall","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800000d8-0002-f600-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:26:41.0000000Z","ProcessId":21572,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:26:42.713 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:26:42.730 +02:00 [WRN] Invalid password for user 759f959e-83b0-486d-af27-4e02cddff551.
+2019-05-22 14:26:42.730 +02:00 [WRN] User 759f959e-83b0-486d-af27-4e02cddff551 failed to provide the correct password.
+2019-05-22 14:26:42.746 +02:00 [INF] {"Username":"busthemall","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800000d9-0002-f600-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:26:42.0000000Z","ProcessId":21572,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:26:44.188 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:26:44.202 +02:00 [WRN] Invalid password for user 759f959e-83b0-486d-af27-4e02cddff551.
+2019-05-22 14:26:44.203 +02:00 [WRN] User 759f959e-83b0-486d-af27-4e02cddff551 failed to provide the correct password.
+2019-05-22 14:26:44.213 +02:00 [INF] {"Username":"busthemall","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800000da-0002-f600-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:26:44.0000000Z","ProcessId":21572,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:26:45.287 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:26:45.302 +02:00 [WRN] Invalid password for user 759f959e-83b0-486d-af27-4e02cddff551.
+2019-05-22 14:26:45.302 +02:00 [WRN] User 759f959e-83b0-486d-af27-4e02cddff551 failed to provide the correct password.
+2019-05-22 14:26:45.313 +02:00 [INF] {"Username":"busthemall","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"800000db-0002-f600-b63f-84710c7967bb","TimeStamp":"2019-05-22T12:26:45.0000000Z","ProcessId":21572,"LocalIpAddress":"::1:5000","RemoteIpAddress":"::1","$type":"UserLoginFailureEvent"}
+2019-05-22 14:26:46.342 +02:00 [DBG] CORS request made for path: /Account/Login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2019-05-22 14:26:46.356 +02:00 [WRN] Invalid password for user 759f959e-83b0-486d-af27-4e02cddff551.
+2019-05-22 14:26:46.356 +02:00 [WRN] User 759f959e-83b0-486d-af27-4e02cddff551 failed to provide the correct password.
+2019-05-22 14:26:46.356 +02:00 [WRN] User 759f959e-83b0-486d-af27-4e02cddff551 is locked out.
+2019-05-22 14:26:46.363 +02:00 [WRN] User 759f959e-83b0-486d-af27-4e02cddff551 is currently locked out.
+2019-05-22 15:10:45.053 +02:00 [INF] Starting IdentityServer4 version 3.0.0.0
+2019-05-22 15:10:45.124 +02:00 [INF] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2019-05-22 15:10:45.136 +02:00 [INF] Using the default authentication scheme Identity.Application for IdentityServer
+2019-05-22 15:10:45.136 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for authentication
+2019-05-22 15:10:45.136 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-in
+2019-05-22 15:10:45.136 +02:00 [DBG] Using Identity.External as default ASP.NET Core scheme for sign-out
+2019-05-22 15:10:45.136 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for challenge
+2019-05-22 15:10:45.136 +02:00 [DBG] Using Identity.Application as default ASP.NET Core scheme for forbid
+2019-05-22 15:10:45.389 +02:00 [DBG] Login Url: /Account/Login
+2019-05-22 15:10:45.393 +02:00 [DBG] Login Return Url Parameter: ReturnUrl
+2019-05-22 15:10:45.393 +02:00 [DBG] Logout Url: /Account/Logout
+2019-05-22 15:10:45.393 +02:00 [DBG] ConsentUrl Url: /consent
+2019-05-22 15:10:45.393 +02:00 [DBG] Consent Return Url Parameter: returnUrl
+2019-05-22 15:10:45.393 +02:00 [DBG] Error Url: /home/error
+2019-05-22 15:10:45.393 +02:00 [DBG] Error Id Parameter: errorId
