@@ -38,6 +38,8 @@ namespace InsideAirbnb.Controllers
                 features = repository.GetAll().Take(1000).Select(item =>
                 {
                     var fullItem = listingsRepo.GetById(item.Id);
+                    string availabilityStatus = "LOW"; // default
+                    if (item.Availability365 > 60) availabilityStatus = "HIGH";
                     return new
                     {
                         type = "Feature",
@@ -59,6 +61,7 @@ namespace InsideAirbnb.Controllers
                             reviews_per_month = item.ReviewsPerMonth,
                             number_of_reviews = item.NumberOfReviews,
                             last_review = item.LastReview,
+                            availabilityStatus,
                             availability_365 = item.Availability365,
                             review_rating = fullItem.ReviewScoresRating !=null ? fullItem.ReviewScoresRating : 0,
                         },

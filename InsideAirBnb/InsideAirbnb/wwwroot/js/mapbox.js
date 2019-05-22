@@ -35,8 +35,8 @@
                 "<div class='listingSectionSubhead'><p id='occupancy_rate'>(INSERT) occupancy rate (est.)</p> " +
                 "<p id='reviews_per_month'>" + e.features[0].properties.reviews_per_month + " reviews per month</p> " +
                 "<p id='number_of_reviews'>" + e.features[0].properties.number_of_reviews + " reviews</p> " +
-                "<p id='last_review'> last review on " + e.features[0].properties.last_review + " <br></p></div> " +
-                "<p id='availability'>(INSERT) availability</p> " +
+            "<p id='last_review'> last review on " + e.features[0].properties.last_review + " <br></p></div> " +
+            "<p id='availability'>" + e.features[0].properties.availabilityStatus + " availability</p> " +
                 "<sub id='availability_365'>" + e.features[0].properties.availability_365 + "days/year(PERCENTAGE%)</sub>  <br>" +
                 "<sub>click listing on map to 'pin' details</sub> " +
                 "</div > ")
@@ -128,39 +128,39 @@
                 popup.remove();
             }
         });
-    });
-    map.on('sourcedata', () => {
-        var features = map.queryRenderedFeatures({ layers: ['locations_layer'] })
-        var amountApartments = features.filter(feature => feature.properties.room_type == "Entire home/apt")
-        var amountPrivateRooms = features.filter(feature => feature.properties.room_type == "Private room")
-        var amountSharedRooms = features.filter(feature => feature.properties.room_type == "Shared room")
-        //get percentage
-        var apartmentsPercentage = ((amountApartments.length / features.length) * 100).toFixed(1);
-        var privatePercentage = ((amountPrivateRooms.length / features.length) * 100).toFixed(1);
-        var sharedPercentage = ((amountSharedRooms.length / features.length) * 100).toFixed(1);
-        //Update UI
-        document.getElementById("number_listings_loaded").innerText = features.length;
-        document.getElementById("entireHomeApartmentsPercentage").innerText = apartmentsPercentage + "%";
-        document.getElementById("EntireHomeCount").innerText = amountApartments.length + " (" + apartmentsPercentage + "%)";
-        document.getElementById("sharedRoomsCount").innerText = amountPrivateRooms.length + " (" + privatePercentage + "%)";
-        document.getElementById("privateRoomCount").innerText = amountSharedRooms.length + " (" + sharedPercentage + "%)";
+        map.on('sourcedata', () => {
+            var features = map.queryRenderedFeatures({ layers: ['locations_layer'] })
+            var amountApartments = features.filter(feature => feature.properties.room_type == "Entire home/apt")
+            var amountPrivateRooms = features.filter(feature => feature.properties.room_type == "Private room")
+            var amountSharedRooms = features.filter(feature => feature.properties.room_type == "Shared room")
+            //get percentage
+            var apartmentsPercentage = ((amountApartments.length / features.length) * 100).toFixed(1);
+            var privatePercentage = ((amountPrivateRooms.length / features.length) * 100).toFixed(1);
+            var sharedPercentage = ((amountSharedRooms.length / features.length) * 100).toFixed(1);
+            //Update UI
+            document.getElementById("number_listings_loaded").innerText = features.length;
+            document.getElementById("entireHomeApartmentsPercentage").innerText = apartmentsPercentage + "%";
+            document.getElementById("EntireHomeCount").innerText = amountApartments.length + " (" + apartmentsPercentage + "%)";
+            document.getElementById("sharedRoomsCount").innerText = amountPrivateRooms.length + " (" + privatePercentage + "%)";
+            document.getElementById("privateRoomCount").innerText = amountSharedRooms.length + " (" + sharedPercentage + "%)";
 
-        if (map.areTilesLoaded()) {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var data = {
-                labels: ["Entire home/apt", "Private room", "Shared room"],
-                datasets: [{
-                    data: [amountApartments.length, amountPrivateRooms.length, amountSharedRooms.length],
-                    backgroundColor: "#4082c4"
-                }]
-            }
-            var myChart = new Chart(ctx, {
-                type: 'horizontalBar',
-                data: data,
-                options: {
+            if (map.areTilesLoaded()) {
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var data = {
+                    labels: ["Entire home/apt", "Private room", "Shared room"],
+                    datasets: [{
+                        data: [amountApartments.length, amountPrivateRooms.length, amountSharedRooms.length],
+                        backgroundColor: "#4082c4"
+                    }]
                 }
-            });
-            drawGraph = tr
-        }
+                var myChart = new Chart(ctx, {
+                    type: 'horizontalBar',
+                    data: data,
+                    options: {
+                    }
+                });
+            }
+        });
     });
+    
 }, false);
