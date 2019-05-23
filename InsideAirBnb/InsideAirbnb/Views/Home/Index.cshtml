@@ -6,8 +6,8 @@
     <script src="~/js/mapbox.js" asp-append-version="true"></script>
     <script src="~/js/Charts.js" asp-append-version="true"></script>
 }
-<div class="map-container row" style="height: 100vh">
-    <div id='map' style="height:calc(100%)" class="col-md-8"></div>
+<div class="map-container row">
+    <div id='map' style="height:calc(100% - 57px)" class="col-md-8"></div>
     <div id='feature-listing' class='listing'></div>
     <nav id='filter-group' class='filter-group'></nav>
     <div class="map-sidebar col-md-4">
@@ -45,16 +45,19 @@
                     </optgroup>
                 </select>
             </div>
-            <div class="col-md-6">
-                <h3># <text id="number_listings_loaded"></text> NUMBER LISTINGS LOADED</h3>
+            <div class="col-md-6 center">
+                <div class="center">
+                    <h3># <text id="number_listings_loaded"></text> NUMBER LISTINGS LOADED</h3>
+
+                </div>
             </div>
         </div>
         <hr />
-        <div class="row">
+        <div class="col-md-12">
             <p><b>How is Airbnb really being used in and affecting your neighbourhoods?</b></p>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 ">
                 <b>Room Type</b>
             </div>
             <div class="col-md-6" style="text-align: right;">
@@ -66,36 +69,26 @@
         </div>
         <hr style="margin:0px" />
         <div class="row" style="margin-right:3px;">
-            <div class="col-md-4">
+            <div class="col-md-4 no-padding">
                 <p>
                     Airbnb hosts can list entire homes/apartments, private or shared rooms.
                     Depending on the room type, <a href="#">availability</a>, and <a href="#">activity</a>, an airbnb listing could be more like a hotel, disruptive for neighbours, taking away housing, and <a href="#">illigal</a>.
                 </p>
             </div>
-            <div class="col-md-6 chart-container" style="position: relative; height:40vh; width:80vw;">
+            <div class="col-md-6 chart-container no-padding" style="position: relative; height:40vh; width:80vw;">
                 <canvas id="myChart"></canvas>
             </div>
-            <div class="col-md-2">
-                <div class="col-md-12">
+            <div class="col-md-2 no-padding percentages">
                 <span id="entireHomeApartmentsPercentage">NNN (%%)</span>
-                </div>
-                <p style="font-size:12px;text-align: right;">Entire homes/apartments</p>
-                <div class="col-md-12">
+                <p class="sub-text">Entire homes/apartments</p>
                 <span id="priceTagApertments">PRICE</span>
-                </div>
-                <p style="font-size:12px;text-align: right;">price/night</p>
-                <div class="col-md-12">
+                <p class="sub-text">price/night</p>
                 <span id="EntireHomeCount">(COUNT) (%%)</span>
-                </div>
-                <p style="font-size:12px;text-align: right;">Entire homes/apartments</p>
-                <div class="col-md-12">
+                <p class="sub-text">Entire homes/apartments</p>
                 <span id="privateRoomCount">(COUNT) (%%)</span>
-                </div>
-                <p style="font-size:12px;text-align: right;">private rooms</p>
-                <div class="col-md-12">
+                <p class="sub-text">private rooms</p>
                 <span id="sharedRoomsCount">(COUNT) (%%)</span>
-                </div>
-                <p style="font-size:12px;text-align: right;">shared rooms</p>
+                <p class="sub-text">shared rooms</p>
             </div>
         </div>
         @*
@@ -113,6 +106,7 @@
                 </label>
             </div>
         </div>
+        <hr class="separator" />
         <div class="row" style="margin-right:3px;">
             <hr style="margin:0px" />
             <div class="col-md-10">
@@ -122,27 +116,53 @@
                 <p>Do the number of nights booked per year make it impossible for a listing to be used for residential housing?</p>
                 <p>And what is renting to a tourist full-time rather than a resident doing to our neighbourhoods and cities?</p>
             </div>
-            <div class="col-md-2">
-                <div class="col-md-12">
-                    <span id="entireHomeApartmentsPercentage">NNN (%%)</span>
-                </div>
-                <p style="font-size:12px;text-align: right;">estimated nights/year</p>
-                <div class="col-md-12">
-                    <span id="">PRICE</span>
-                </div>
-                <p style="font-size:12px;text-align: right;">reviews/listing/month</p>
-                <div class="col-md-12">
-                    <span id="">(COUNT) (%%)</span>
-                </div>
+            <div class="col-md-2 no-padding percentages">
+                <span id="entireHomeApartmentsPercentage">NNN (%%)</span>
+                <p class="sub-text">estimated nights/year</p>
+                <span id="">PRICE</span>
+                <p class="sub-text">reviews/listing/month</p>
+                <span id="">(COUNT) (%%)</span>
                 <p style="font-size:12px;text-align: right;">reviews</p>
-                <div class="col-md-12">
-                    <span id="">(COUNT) (%%)</span>
-                </div>
-                <p style="font-size:12px;text-align: right;">estimated occupancy</p>
-                <div class="col-md-12">
-                    <span id="">(COUNT) (%%)</span>
-                </div>
-                <p style="font-size:12px;text-align: right;">estimated income/month</p>
+                <span id="">(COUNT) (%%)</span>
+                <p class="sub-text">estimated occupancy</p>
+                <span id="">(COUNT) (%%)</span>
+                <p class="sub-text">estimated income/month</p>
+            </div>
+        </div>
+        @*
+            End Active right side
+            Start Availability Tab
+        *@
+        <div class="row">
+            <div class="col-md-6">
+                <b>Availability</b>
+            </div>
+            <div class="col-md-6" style="text-align: right;">
+                <label for="onlyAvailabiltyCheckboc" style="font-size:10px">
+                    Only HIGH available.
+                    <input id="onlyAvailabiltyCheckboc" type="checkbox" name="onlyAvailabiltyCheckbox" style="float:left" />
+                </label>
+            </div>
+        </div>
+        <hr class="separator" />
+        <div class="row" style="margin-right:3px;">
+            <hr style="margin:0px" />
+            <div class="col-md-10">
+                <p>An Airbnb host can setup a calendar for their listing so that it is only available for a few days or weeks a year.</p>
+                <p>Other listings are available all year round (except for when it is already booked).</p>
+                <p>Entire homes or apartments <b style="text-decoration:underline;">highly available </b>year-round for tourists, probably don't have the owner present, could be illegal, and more importantly, are displacing residents.</p>
+            </div>
+            <div class="col-md-2 no-padding percentages">
+                <span id="entireHomeApartmentsPercentage">NNN (%%)</span>
+                <p class="sub-text">estimated nights/year</p>
+                <span id="">PRICE</span>
+                <p class="sub-text">reviews/listing/month</p>
+                <span id="">(COUNT) (%%)</span>
+                <p style="font-size:12px;text-align: right;">reviews</p>
+                <span id="">(COUNT) (%%)</span>
+                <p class="sub-text">estimated occupancy</p>
+                <span id="">(COUNT) (%%)</span>
+                <p class="sub-text">estimated income/month</p>
             </div>
         </div>
     </div>

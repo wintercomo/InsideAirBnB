@@ -8155,3 +8155,36 @@ The statement has been terminated.
 2019-05-22 15:10:45.393 +02:00 [DBG] Consent Return Url Parameter: returnUrl
 2019-05-22 15:10:45.393 +02:00 [DBG] Error Url: /home/error
 2019-05-22 15:10:45.393 +02:00 [DBG] Error Id Parameter: errorId
+2019-05-22 19:28:46.616 +02:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2019-05-22 19:28:47.233 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2019-05-22 19:28:47.233 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2019-05-22 19:28:47.243 +02:00 [DBG] Start discovery request
+2019-05-22 19:28:47.763 +02:00 [DBG] Request path /.well-known/openid-configuration/jwks matched to endpoint type Discovery
+2019-05-22 19:28:47.769 +02:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryKeyEndpoint
+2019-05-22 19:28:47.769 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2019-05-22 19:28:47.777 +02:00 [DBG] Start key discovery request
+2019-05-22 19:28:47.954 +02:00 [DBG] Request path /connect/authorize matched to endpoint type Authorize
+2019-05-22 19:28:47.963 +02:00 [DBG] Endpoint enabled: Authorize, successfully created handler: IdentityServer4.Endpoints.AuthorizeEndpoint
+2019-05-22 19:28:47.964 +02:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.AuthorizeEndpoint for /connect/authorize
+2019-05-22 19:28:47.971 +02:00 [DBG] Start authorize request
+2019-05-22 19:28:47.990 +02:00 [DBG] No user present in authorize request
+2019-05-22 19:28:48.001 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 19:28:48.048 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 19:28:48.115 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 19:28:48.145 +02:00 [INF] ValidatedAuthorizeRequest
+{"ClientId":"mvc","ClientName":"MVC Client","RedirectUri":"https://localhost:44307/signin-oidc","AllowedRedirectUris":["https://localhost:44307/signin-oidc"],"SubjectId":"anonymous","ResponseType":"id_token","ResponseMode":"form_post","GrantType":"implicit","RequestedScopes":"openid profile","State":"CfDJ8NnD0EVUvbpElyCe3ShGXDW_jqsQE25HBl9MBu9JSbbk7uwyMk2mlGHZEkzI_8-OfjvCSGUX-5SDe5onnluEuCWg5uyIH8WGR3IT0brcBOwo_vzHXXtExggdvXRBf-ENUxCN_6ezy_rJDz_sa2kyX5ZKAy_MpjZhrTI5BWQQWqCkAh-F6QXltlvDhU-JRvjhoiehXEKZrn9yw_SZ2DF_EvtofcnwLsHL6dfBOEyJYpvij74oPXyeAUecEaeAsPFCoPQvdpC80h_hEd_Lds6zGro6DaUo_WRAhxknPgMW3M3k_SozjxKlKVl_TXI-GqhYuQ","UiLocales":null,"Nonce":"636941429278905512.Njc5ZTEzZmYtMWE4NS00OGFiLWEyZjItZTBiMTg2ZGQ4N2QxMTIzYzM3NWYtNGMwOC00YzQ3LTk1NGQtYzk1NWZkMzVkMzE1","AuthenticationContextReferenceClasses":null,"DisplayMode":null,"PromptMode":null,"MaxAge":null,"LoginHint":null,"SessionId":null,"Raw":{"client_id":"mvc","redirect_uri":"https://localhost:44307/signin-oidc","response_type":"id_token","scope":"openid profile","response_mode":"form_post","nonce":"636941429278905512.Njc5ZTEzZmYtMWE4NS00OGFiLWEyZjItZTBiMTg2ZGQ4N2QxMTIzYzM3NWYtNGMwOC00YzQ3LTk1NGQtYzk1NWZkMzVkMzE1","state":"CfDJ8NnD0EVUvbpElyCe3ShGXDW_jqsQE25HBl9MBu9JSbbk7uwyMk2mlGHZEkzI_8-OfjvCSGUX-5SDe5onnluEuCWg5uyIH8WGR3IT0brcBOwo_vzHXXtExggdvXRBf-ENUxCN_6ezy_rJDz_sa2kyX5ZKAy_MpjZhrTI5BWQQWqCkAh-F6QXltlvDhU-JRvjhoiehXEKZrn9yw_SZ2DF_EvtofcnwLsHL6dfBOEyJYpvij74oPXyeAUecEaeAsPFCoPQvdpC80h_hEd_Lds6zGro6DaUo_WRAhxknPgMW3M3k_SozjxKlKVl_TXI-GqhYuQ","x-client-SKU":"ID_NETSTANDARD2_0","x-client-ver":"5.3.0.0"},"$type":"AuthorizeRequestValidationLog"}
+2019-05-22 19:28:48.200 +02:00 [INF] Showing login: User is not authenticated
+2019-05-22 19:28:48.365 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 19:28:48.366 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 19:28:48.366 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 19:28:48.372 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 19:28:58.325 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 19:28:58.326 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 19:28:58.327 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 19:29:01.896 +02:00 [WRN] Invalid password for user 759f959e-83b0-486d-af27-4e02cddff551.
+2019-05-22 19:29:01.899 +02:00 [WRN] User 759f959e-83b0-486d-af27-4e02cddff551 failed to provide the correct password.
+2019-05-22 19:29:02.448 +02:00 [INF] {"Username":"busthemall","Endpoint":"UI","Category":"Authentication","Name":"User Login Failure","EventType":"Failure","Id":1001,"Message":"invalid credentials","ActivityId":"8000028d-0001-fd00-b63f-84710c7967bb","TimeStamp":"2019-05-22T17:29:02.0000000Z","ProcessId":19588,"LocalIpAddress":"127.0.0.1:5000","RemoteIpAddress":"127.0.0.1","$type":"UserLoginFailureEvent"}
+2019-05-22 19:29:02.452 +02:00 [DBG] Start authorize request protocol validation
+2019-05-22 19:29:02.453 +02:00 [DBG] client configuration validation for client mvc succeeded.
+2019-05-22 19:29:02.454 +02:00 [DBG] Calling into custom validator: IdentityServer4.Validation.DefaultCustomAuthorizeRequestValidator
+2019-05-22 19:29:02.454 +02:00 [DBG] client configuration validation for client mvc succeeded.

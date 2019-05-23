@@ -44,7 +44,11 @@
     };
     // Event listeners
     var FilterApertmentsCheckbox = document.querySelector("input[name=filterApertmentsOnly]");
+    var onlyAvailabiltyCheckbox = document.querySelector("input[name=onlyAvailabiltyCheckbox]");
     FilterApertmentsCheckbox.addEventListener('change', function () {
+        setMapFilter();
+    });
+    onlyAvailabiltyCheckbox.addEventListener('change', function () {
         setMapFilter();
     });
     document.getElementById("map_filter").addEventListener("change", () => {
@@ -79,9 +83,8 @@
                 mapFilters.push([filterBy, label, selectedValue])
                 break;
         }
-        if (FilterApertmentsCheckbox.checked) {
-            mapFilters.push(["==", "room_type", "Entire home/apt"]);
-        } 
+        if (FilterApertmentsCheckbox.checked) mapFilters.push(["==", "room_type", "Entire home/apt"]);
+        if (onlyAvailabiltyCheckbox.checked) mapFilters.push(["==", "availabilityStatus", "HIGH"]);
         map.setFilter('locations_layer', mapFilters);
     }
     
@@ -157,6 +160,20 @@
                     type: 'horizontalBar',
                     data: data,
                     options: {
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    // Include a dollar sign in the ticks
+                                    callback: function (value, index, values) {
+                                        return '$' + value;
+                                    }
+                                }
+                                
+                            }]
+                        }
                     }
                 });
             }
