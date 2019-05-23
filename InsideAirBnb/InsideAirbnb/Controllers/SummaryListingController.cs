@@ -14,30 +14,33 @@ namespace InsideAirbnb.Controllers
     [ApiController]
     public class SummaryListingController : Controller
     {
-        private readonly IRepository<SummaryListings> repository;
+        private readonly IRepository<SummaryListings> sumListingRepo;
         private readonly IRepository<Listings> listingsRepo;
 
 
         public SummaryListingController(IRepository<SummaryListings> repository, IRepository<Listings> listingsRepo)
         {
-            this.repository = repository;
+            this.sumListingRepo = repository;
             this.listingsRepo = listingsRepo;
         }
-        [Route("/test")]
-        [HttpGet]
-        public IActionResult Test()
+        public int? getReviews(int id)
         {
-            return Ok(listingsRepo.GetById(2818));
+            int? value = listingsRepo.GetById(id).ReviewScoresRating;
+            return value != null ? value : 0;
         }
         [HttpGet]
         public IActionResult Index()
         {
+            var features = from sumItem in sumListingRepo.GetAll()
+                            join listItem in listingsRepo.GetAll() on sumItem.Id equals listItem.Id
+                            select new { sumItem = sumItem, item= listItem };
             var geo = new
             {
                 type = "FeatureCollection",
-                features = repository.GetAll().Take(1000).Select(item =>
+                features = features.Select(tt =>
                 {
-                    var fullItem = listingsRepo.GetById(item.Id);
+                    var item = tt.sumItem;
+                    //var fullItem = listingsRepo.GetById(item.Id);
                     string availabilityStatus = "LOW"; // default
                     if (item.Availability365 > 60) availabilityStatus = "HIGH";
                     return new
@@ -63,13 +66,22 @@ namespace InsideAirbnb.Controllers
                             last_review = item.LastReview,
                             availabilityStatus,
                             availability_365 = item.Availability365,
-                            review_rating = fullItem.ReviewScoresRating !=null ? fullItem.ReviewScoresRating : 0,
+                            review_rating = tt.item.ReviewScoresValue,
                         },
                     };
                 })
             };
             return Ok(geo);
         }
-
+        [HttpGet("{id}")]
+        public IActionResult GetProductById(int id)
+        {
+            var product = listingsRepo.GetById(id);
+            if (product == null)
+            {
+                return NotFound("Het product is niet gevonden");
+            }
+            return Ok(product.ReviewScoresRating);
+        }
     }
 }

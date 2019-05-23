@@ -79,15 +79,15 @@
                 <canvas id="myChart"></canvas>
             </div>
             <div class="col-md-2 no-padding percentages">
-                <span id="entireHomeApartmentsPercentage">NNN (%%)</span>
+                <b id="entireHomeApartmentsPercentage">NNN (%%)</b>
                 <p class="sub-text">Entire homes/apartments</p>
-                <span id="priceTagApertments">PRICE</span>
+                <b id="priceTagApertments">PRICE</b>
                 <p class="sub-text">price/night</p>
-                <span id="EntireHomeCount">(COUNT) (%%)</span>
+                <b id="EntireHomeCount">(COUNT) (%%)</b>
                 <p class="sub-text">Entire homes/apartments</p>
-                <span id="privateRoomCount">(COUNT) (%%)</span>
+                <b id="privateRoomCount">(COUNT) (%%)</b>
                 <p class="sub-text">private rooms</p>
-                <span id="sharedRoomsCount">(COUNT) (%%)</span>
+                <b id="sharedRoomsCount">(COUNT) (%%)</b>
                 <p class="sub-text">shared rooms</p>
             </div>
         </div>
@@ -150,19 +150,17 @@
             <div class="col-md-10">
                 <p>An Airbnb host can setup a calendar for their listing so that it is only available for a few days or weeks a year.</p>
                 <p>Other listings are available all year round (except for when it is already booked).</p>
-                <p>Entire homes or apartments <b style="text-decoration:underline;">highly available </b>year-round for tourists, probably don't have the owner present, could be illegal, and more importantly, are displacing residents.</p>
+                <p>Entire homes or apartments <a class="black-link" href="#" data-toggle="tooltip" title="highly available: > 60 days/year">highly available</a>year-round for tourists, probably don't have the owner present, could be illegal, and more importantly, are displacing residents.</p>
             </div>
             <div class="col-md-2 no-padding percentages">
-                <span id="entireHomeApartmentsPercentage">NNN (%%)</span>
-                <p class="sub-text">estimated nights/year</p>
-                <span id="">PRICE</span>
-                <p class="sub-text">reviews/listing/month</p>
-                <span id="">(COUNT) (%%)</span>
-                <p style="font-size:12px;text-align: right;">reviews</p>
-                <span id="">(COUNT) (%%)</span>
-                <p class="sub-text">estimated occupancy</p>
-                <span id="">(COUNT) (%%)</span>
-                <p class="sub-text">estimated income/month</p>
+                <b id="highAvailablityPercentage">NNN (%%)</b>
+                <p class="sub-text"><a class="black-link" href="#" data-toggle="tooltip" title="High: > 60 days/year">High</a> Availability</p>
+                <b id="amountHighAvailability">(COUNT) (%%)</b>
+                <p class="sub-text">Listings w <a class="black-link" href="#" data-toggle="tooltip" title="High: > 60 days/year">heigh</a> availability</p>
+                <b id="amountLowAvailability">(COUNT) (%%)</b>
+                <p class="sub-text">Listings w <a class="black-link" href="#" data-toggle="tooltip" title="Low: <= 60 days/year">low</a> availability</p>
+                <b id="availabilityAverage">(COUNT) (%%)</b>
+                <p class="sub-text">days/year</p>
             </div>
         </div>
     </div>

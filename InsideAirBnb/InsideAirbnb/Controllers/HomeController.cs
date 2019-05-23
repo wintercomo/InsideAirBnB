@@ -14,26 +14,26 @@ namespace InsideAirbnb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRepository<Neighbourhoods> repository;
+        private readonly IRepository<Neighbourhoods> neighbourhoodRepo;
         private readonly IRepository<Listings> listingRepo;
 
         public HomeController(IRepository<Neighbourhoods> repository, IRepository<Listings> listingRepo)
         {
-            this.repository = repository;
+            this.neighbourhoodRepo = repository;
             this.listingRepo = listingRepo;
         }
         [HttpGet]
         public IActionResult Index()
         {
-            NeighbourhoodsViewModel viewModel = new NeighbourhoodsViewModel() { neighbourhoods = repository.GetAll() };
-            HomeViewModel homeViewModel = new HomeViewModel() { neighbourhoods = repository.GetAll(), listings = listingRepo.GetAll() };
+            NeighbourhoodsViewModel viewModel = new NeighbourhoodsViewModel() { neighbourhoods = neighbourhoodRepo.GetAll() };
+            HomeViewModel homeViewModel = new HomeViewModel() { neighbourhoods = neighbourhoodRepo.GetAll(), listings = listingRepo.GetAll() };
             return View(homeViewModel);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetProductById(int id)
         {
-            var product = repository.GetById(id);
+            var product = neighbourhoodRepo.GetById(id);
             if (product == null)
             {
                 return NotFound("Het product is niet gevonden");

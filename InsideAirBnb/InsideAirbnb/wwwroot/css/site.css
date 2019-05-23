@@ -79,3 +79,7 @@ body {
     height:calc(100% - 57px);
     overflow:scroll;
 }
+.black-link{
+    color:black;
+    text-decoration:underline;
+}

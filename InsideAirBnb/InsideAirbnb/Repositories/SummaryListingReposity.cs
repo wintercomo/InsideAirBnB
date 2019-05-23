@@ -22,7 +22,7 @@ namespace InsideAirbnb.Repositories
 
         SummaryListings IRepository<SummaryListings>.GetById(int id)
         {
-            throw new NotImplementedException();
+            return context.SummaryListings.FirstOrDefault(p => p.Id == id);
         }
     }
 }

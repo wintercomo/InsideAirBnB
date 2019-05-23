@@ -132,20 +132,39 @@
             }
         });
         map.on('sourcedata', () => {
+            //amount makers room type
             var features = map.queryRenderedFeatures({ layers: ['locations_layer'] })
             var amountApartments = features.filter(feature => feature.properties.room_type == "Entire home/apt")
             var amountPrivateRooms = features.filter(feature => feature.properties.room_type == "Private room")
             var amountSharedRooms = features.filter(feature => feature.properties.room_type == "Shared room")
+            //amout makers availability
+            var amountHighAvailable= features.filter(feature => feature.properties.availabilityStatus == "HIGH")
+            var amountLowAvailable = features.filter(feature => feature.properties.availabilityStatus == "LOW")
+
+            //Get average
+            var sum = 0
+            for (var i = 0; i < features.length; i++) {
+                sum += features[i].properties.availability_365
+            }
+            var availabilityAverage = sum / features.length
             //get percentage
             var apartmentsPercentage = ((amountApartments.length / features.length) * 100).toFixed(1);
             var privatePercentage = ((amountPrivateRooms.length / features.length) * 100).toFixed(1);
             var sharedPercentage = ((amountSharedRooms.length / features.length) * 100).toFixed(1);
+            var highAvailablePercentage = ((amountHighAvailable.length / features.length) * 100).toFixed(1);
+            var lowAvailablePercentage = ((amountLowAvailable.length / features.length) * 100).toFixed(1);
+            var availabilitiAveragePercentage = ((availabilityAverage/ 365) * 100).toFixed(1);
+
             //Update UI
             document.getElementById("number_listings_loaded").innerText = features.length;
             document.getElementById("entireHomeApartmentsPercentage").innerText = apartmentsPercentage + "%";
             document.getElementById("EntireHomeCount").innerText = amountApartments.length + " (" + apartmentsPercentage + "%)";
             document.getElementById("sharedRoomsCount").innerText = amountPrivateRooms.length + " (" + privatePercentage + "%)";
             document.getElementById("privateRoomCount").innerText = amountSharedRooms.length + " (" + sharedPercentage + "%)";
+            document.getElementById("highAvailablityPercentage").innerText = highAvailablePercentage + "%";
+            document.getElementById("amountHighAvailability").innerText = amountHighAvailable.length + " (" + highAvailablePercentage + "%)";
+            document.getElementById("amountLowAvailability").innerText = amountLowAvailable.length + " (" + lowAvailablePercentage + "%)";
+            document.getElementById("availabilityAverage").innerText = availabilityAverage.toFixed(1) + " (" + availabilitiAveragePercentage + "%)";
 
             if (map.areTilesLoaded()) {
                 var ctx = document.getElementById('myChart').getContext('2d');
