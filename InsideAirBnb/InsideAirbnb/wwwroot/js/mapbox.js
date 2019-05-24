@@ -21,73 +21,37 @@
             listing_ammount = e.features[0].properties.calculated_host_listings_count + " other listings known";
         }
         popup.setLngLat(e.lngLat)
-            .setHTML("<div class='pup_up'> " +
-                "<b>" + e.features[0].properties.host_name + "</b> <br>" +
-                "<sub>(" + listing_ammount + ")</sub> " +
-                "<hr> <p id='listing_id'>" + e.features[0].properties.id + "</p> " +
-                "<p id='listingNameContainer' > " + e.features[0].properties.name + "</p> " +
-                "<p id='neigbourhood'>" + e.features[0].properties.neighbourhood + "</p> " +
-                "<p id='room_type' > " + e.features[0].properties.room_type + "</p> <hr> " +
-                "<div class='income_section>'<p id='income'>&euro;INSERT EXPECTED INCOME</p> " +
-                "<div class='listingSectionSubhead'><p id='location_price'>&euro;" + e.features[0].properties.price + "/night <br></p>" +
-                "<p id='minimun_nights'>" + e.features[0].properties.minimum_nights + " nights minimum</p></div></div> " +
-                "<br> <p id='nights_per_year'>(INSERT) nights per year (est.)</p> " +
-                "<div class='listingSectionSubhead'><p id='occupancy_rate'>(INSERT) occupancy rate (est.)</p> " +
-                "<p id='reviews_per_month'>" + e.features[0].properties.reviews_per_month + " reviews per month</p> " +
-                "<p id='number_of_reviews'>" + e.features[0].properties.number_of_reviews + " reviews</p> " +
-            "<p id='last_review'> last review on " + e.features[0].properties.last_review + " <br></p></div> " +
-            "<p id='availability'>" + e.features[0].properties.availabilityStatus + " availability</p> " +
-                "<sub id='availability_365'>" + e.features[0].properties.availability_365 + "days/year(PERCENTAGE%)</sub>  <br>" +
-                "<sub>click listing on map to 'pin' details</sub> " +
-                "</div > ")
+            .setHTML(`<div class='pup_up'>
+                <a href='http://www.airbnb.com/users/show/${e.features[0].properties.host_id}'><b>${e.features[0].properties.host_name}</b></a> <br>
+                <sub>(${listing_ammount}
+                <hr class='separator'><a href='http://www.airbnb.com/rooms/${e.features[0].properties.id}'> <b id='listing_id'>${e.features[0].properties.id}</b>
+                <p id='listingNameContainer' >${e.features[0].properties.name}</p></a>
+                <b id='neigbourhood'>${e.features[0].properties.neighbourhood}</b> 
+                <p id='room_type'> ${e.features[0].properties.room_type}</p> <hr class='separator'> 
+                <b id='income'>&euro;INSERT EXPECTED INCOME</b>
+                <p id='location_price'>&euro;${e.features[0].properties.price}/night <br></p>
+                <p id='minimun_nights'>${e.features[0].properties.minimum_nights} nights minimum</p>
+                <p id='reviews_per_month'>${e.features[0].properties.reviews_per_month} reviews per month</p>
+                <p id='number_of_reviews'>${e.features[0].properties.number_of_reviews}reviews</p>
+                <p id='last_review'> last review on ${e.features[0].properties.last_review}<br></p>
+                <p id='availability'>${e.features[0].properties.availabilityStatus} availability</p> 
+                <sub id='availability_365'>${e.features[0].properties.availability_365}days/year(PERCENTAGE%)</sub>  <br>
+                <sub>click listing on map to 'pin' details</sub>
+                </div >`)
             .addTo(map);
     };
     // Event listeners
     var FilterApertmentsCheckbox = document.querySelector("input[name=filterApertmentsOnly]");
     var onlyAvailabiltyCheckbox = document.querySelector("input[name=onlyAvailabiltyCheckbox]");
     FilterApertmentsCheckbox.addEventListener('change', function () {
-        setMapFilter();
+        setMapFilter(map);
     });
     onlyAvailabiltyCheckbox.addEventListener('change', function () {
-        setMapFilter();
+        setMapFilter(map);
     });
     document.getElementById("map_filter").addEventListener("change", () => {
-        setMapFilter();
+        setMapFilter(map);
     });
-    //end event listeners
-    function setMapFilter() {
-        var label = $('#map_filter :selected').parent().attr('label');
-        var selectedValue = document.getElementById("map_filter").value;
-        var filterBy = "=="
-        let mapFilters = ["all"];
-        switch (label) {
-            case "review rating":
-                filterBy = "<=";
-                selectedValue = parseInt(selectedValue)
-                label = "review_rating"
-                mapFilters.push([filterBy, label, selectedValue])
-                break;
-            case "price":
-                if (selectedValue == "1000+") {
-                    selectedValue = selectedValue.slice(0, selectedValue.length - 1);
-                    filterBy = ">"
-                } else {
-                    filterBy = "<="
-                }
-                selectedValue = parseInt(selectedValue)
-                mapFilters.push([filterBy, label, selectedValue])
-                break;
-            case undefined:
-                break;
-            default:
-                mapFilters.push([filterBy, label, selectedValue])
-                break;
-        }
-        if (FilterApertmentsCheckbox.checked) mapFilters.push(["==", "room_type", "Entire home/apt"]);
-        if (onlyAvailabiltyCheckbox.checked) mapFilters.push(["==", "availabilityStatus", "HIGH"]);
-        map.setFilter('locations_layer', mapFilters);
-    }
-    
     map.on('load', function () {
         map.addLayer({
             "id": "locations_layer",
@@ -97,6 +61,10 @@
                 "data": '/sum',
             },
             'paint': {
+                'circle-radius': {
+                    'base': 1.75,
+                    'stops': [[12, 2], [22, 180]]
+                },
                 // color circles by ethnicity, using a match expression
                 // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
                 'circle-color': [
@@ -109,9 +77,6 @@
                 ]
             }
         });
-        let drawGraph = false;
-        
-        //map.setFilter('locations_layer', [">", "price", 100]);
         map.addControl(new mapboxgl.NavigationControl());
         map.on('click', 'locations_layer', function (e) {
             clicked = !clicked;
@@ -131,72 +96,92 @@
                 popup.remove();
             }
         });
+        // When markers are made create the chart
         map.on('sourcedata', () => {
-            //amount makers room type
             var features = map.queryRenderedFeatures({ layers: ['locations_layer'] })
             var amountApartments = features.filter(feature => feature.properties.room_type == "Entire home/apt")
             var amountPrivateRooms = features.filter(feature => feature.properties.room_type == "Private room")
             var amountSharedRooms = features.filter(feature => feature.properties.room_type == "Shared room")
             //amout makers availability
-            var amountHighAvailable= features.filter(feature => feature.properties.availabilityStatus == "HIGH")
-            var amountLowAvailable = features.filter(feature => feature.properties.availabilityStatus == "LOW")
-
-            //Get average
-            var sum = 0
-            for (var i = 0; i < features.length; i++) {
-                sum += features[i].properties.availability_365
-            }
-            var availabilityAverage = sum / features.length
-            //get percentage
-            var apartmentsPercentage = ((amountApartments.length / features.length) * 100).toFixed(1);
-            var privatePercentage = ((amountPrivateRooms.length / features.length) * 100).toFixed(1);
-            var sharedPercentage = ((amountSharedRooms.length / features.length) * 100).toFixed(1);
-            var highAvailablePercentage = ((amountHighAvailable.length / features.length) * 100).toFixed(1);
-            var lowAvailablePercentage = ((amountLowAvailable.length / features.length) * 100).toFixed(1);
-            var availabilitiAveragePercentage = ((availabilityAverage/ 365) * 100).toFixed(1);
-
-            //Update UI
-            document.getElementById("number_listings_loaded").innerText = features.length;
-            document.getElementById("entireHomeApartmentsPercentage").innerText = apartmentsPercentage + "%";
-            document.getElementById("EntireHomeCount").innerText = amountApartments.length + " (" + apartmentsPercentage + "%)";
-            document.getElementById("sharedRoomsCount").innerText = amountPrivateRooms.length + " (" + privatePercentage + "%)";
-            document.getElementById("privateRoomCount").innerText = amountSharedRooms.length + " (" + sharedPercentage + "%)";
-            document.getElementById("highAvailablityPercentage").innerText = highAvailablePercentage + "%";
-            document.getElementById("amountHighAvailability").innerText = amountHighAvailable.length + " (" + highAvailablePercentage + "%)";
-            document.getElementById("amountLowAvailability").innerText = amountLowAvailable.length + " (" + lowAvailablePercentage + "%)";
-            document.getElementById("availabilityAverage").innerText = availabilityAverage.toFixed(1) + " (" + availabilitiAveragePercentage + "%)";
-
-            if (map.areTilesLoaded()) {
-                var ctx = document.getElementById('myChart').getContext('2d');
-                var data = {
-                    labels: ["Entire home/apt", "Private room", "Shared room"],
-                    datasets: [{
-                        data: [amountApartments.length, amountPrivateRooms.length, amountSharedRooms.length],
-                        backgroundColor: "#4082c4"
-                    }]
-                }
-                var myChart = new Chart(ctx, {
-                    type: 'horizontalBar',
-                    data: data,
-                    options: {
-                        legend: {
-                            display: false
-                        },
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    // Include a dollar sign in the ticks
-                                    callback: function (value, index, values) {
-                                        return '$' + value;
-                                    }
-                                }
-                                
-                            }]
-                        }
-                    }
-                });
-            }
+            UpdateUI(features, amountApartments, amountPrivateRooms, amountSharedRooms);
+            createChart(map, amountApartments, amountPrivateRooms, amountSharedRooms);
         });
     });
     
 }, false);
+
+function UpdateUI(features, amountApartments, amountPrivateRooms, amountSharedRooms) {
+    var amountHighAvailable = features.filter(feature => feature.properties.availabilityStatus == "HIGH");
+    var amountLowAvailable = features.filter(feature => feature.properties.availabilityStatus == "LOW");
+    //Get average
+    var availabilityAverage = CalcAverage(features);
+    var apartmentsAverage = CalcAveragePrice(amountApartments);
+    var nightsPerYearAverage = CalcAverageNightsPYear(features);
+    var reviewListingsPerMonth = CalcAverageReviewsPerMonth(features);
+    var sum = getTotalReviews(features);
+    //get percentage
+    var apartmentsPercentage = ((amountApartments.length / features.length) * 100).toFixed(1);
+    var privatePercentage = ((amountPrivateRooms.length / features.length) * 100).toFixed(1);
+    var sharedPercentage = ((amountSharedRooms.length / features.length) * 100).toFixed(1);
+    var highAvailablePercentage = ((amountHighAvailable.length / features.length) * 100).toFixed(1);
+    var lowAvailablePercentage = ((amountLowAvailable.length / features.length) * 100).toFixed(1);
+    var availabilitiAveragePercentage = ((availabilityAverage / 365) * 100).toFixed(1);
+    var nightsPerYearPercentage = ((nightsPerYearAverage / 365) * 100).toFixed(1);
+    //Update UI
+    document.getElementById("number_listings_loaded").innerText = features.length;
+    document.getElementById("priceTagApertments").innerText = apartmentsAverage.toFixed(1);
+    document.getElementById("entireHomeApartmentsPercentage").innerText = apartmentsPercentage + "%";
+    document.getElementById("EntireHomeCount").innerText = amountApartments.length + " (" + apartmentsPercentage + "%)";
+    document.getElementById("sharedRoomsCount").innerText = amountPrivateRooms.length + " (" + privatePercentage + "%)";
+    document.getElementById("privateRoomCount").innerText = amountSharedRooms.length + " (" + sharedPercentage + "%)";
+    //activity tab
+    document.getElementById("nightsPerYearAverage").innerText = nightsPerYearAverage.toFixed(1) + ` (${nightsPerYearPercentage}%)`;
+    document.getElementById("reviewListingPerMonth").innerText = reviewListingsPerMonth.toFixed(1);
+    document.getElementById("totalReviewsPerMonth").innerText = sum;
+
+
+    document.getElementById("highAvailablityPercentage").innerText = highAvailablePercentage + "%";
+    document.getElementById("amountHighAvailability").innerText = amountHighAvailable.length + " (" + highAvailablePercentage + "%)";
+    document.getElementById("amountLowAvailability").innerText = amountLowAvailable.length + " (" + lowAvailablePercentage + "%)";
+    document.getElementById("availabilityAverage").innerText = availabilityAverage.toFixed(1) + " (" + availabilitiAveragePercentage + "%)";
+}
+function getTotalReviews(features) {
+    var sum = 0;
+    for (var i = 0; i < features.length; i++) {
+        sum += isNaN(features[i].properties.reviews_per_month) ? 0 : features[i].properties.reviews_per_month;
+    }
+    return sum;
+
+}
+function CalcAverage(features) {
+    var sum = 0;
+    for (var i = 0; i < features.length; i++) {
+        sum += features[i].properties.availability_365;
+    }
+    var availabilityAverage = sum / features.length;
+    return availabilityAverage;
+}
+function CalcAveragePrice(features) {
+    var sum = 0;
+    for (var i = 0; i < features.length; i++) {
+        sum += features[i].properties.price;
+    }
+    var average = sum / features.length;
+    return average;
+}
+function CalcAverageNightsPYear(features) {
+    var sum = 0;
+    for (var i = 0; i < features.length; i++) {
+        sum += (365 - features[i].properties.price);
+    }
+    var average = sum / features.length;
+    return average;
+}
+function CalcAverageReviewsPerMonth(features) {
+    var sum = 0;
+    for (var i = 0; i < features.length; i++) {
+        sum += isNaN(features[i].properties.reviews_per_month) ? 0 : features[i].properties.reviews_per_month;
+    }
+    var average = sum / features.length;
+    return average;
+}

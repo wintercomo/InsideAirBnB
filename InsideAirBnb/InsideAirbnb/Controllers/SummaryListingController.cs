@@ -40,8 +40,7 @@ namespace InsideAirbnb.Controllers
                 features = features.Select(tt =>
                 {
                     var item = tt.sumItem;
-                    //var fullItem = listingsRepo.GetById(item.Id);
-                    string availabilityStatus = "LOW"; // default
+                    string availabilityStatus = "LOW";
                     if (item.Availability365 > 60) availabilityStatus = "HIGH";
                     return new
                     {
@@ -54,6 +53,7 @@ namespace InsideAirbnb.Controllers
                         properties = new
                         {
                             host_name = item.HostName,
+                            host_id = item.HostId,
                             id = item.Id,
                             calculated_host_listings_count = item.CalculatedHostListingsCount,
                             name = "'" + item.Name + "'",

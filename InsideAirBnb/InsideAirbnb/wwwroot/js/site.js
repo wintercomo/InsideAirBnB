@@ -5,3 +5,37 @@
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
+function setMapFilter(map) {
+    var FilterApertmentsCheckbox = document.querySelector("input[name=filterApertmentsOnly]");
+    var onlyAvailabiltyCheckbox = document.querySelector("input[name=onlyAvailabiltyCheckbox]");
+    var label = $('#map_filter :selected').parent().attr('label');
+    var selectedValue = document.getElementById("map_filter").value;
+    var filterBy = "=="
+    let mapFilters = ["all"];
+    switch (label) {
+        case "review rating":
+            filterBy = "<=";
+            selectedValue = parseInt(selectedValue)
+            label = "review_rating"
+            mapFilters.push([filterBy, label, selectedValue])
+            break;
+        case "price":
+            if (selectedValue == "1000+") {
+                selectedValue = selectedValue.slice(0, selectedValue.length - 1);
+                filterBy = ">"
+            } else {
+                filterBy = "<="
+            }
+            selectedValue = parseInt(selectedValue)
+            mapFilters.push([filterBy, label, selectedValue])
+            break;
+        case undefined:
+            break;
+        default:
+            mapFilters.push([filterBy, label, selectedValue])
+            break;
+    }
+    if (FilterApertmentsCheckbox.checked) mapFilters.push(["==", "room_type", "Entire home/apt"]);
+    if (onlyAvailabiltyCheckbox.checked) mapFilters.push(["==", "availabilityStatus", "HIGH"]);
+    map.setFilter('locations_layer', mapFilters);
+}
