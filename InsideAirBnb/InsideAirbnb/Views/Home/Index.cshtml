@@ -3,8 +3,8 @@
     ViewData["Title"] = "Home Page";
 }
 @section Scripts {
-    <script src="~/js/mapbox.js" asp-append-version="true"></script>
-    <script src="~/js/Charts.js" asp-append-version="true"></script>
+<script src="~/js/mapbox.js" asp-append-version="true"></script>
+<script src="~/js/Charts.js" asp-append-version="true"></script>
 }
 <div class="map-container row">
     <div id='map' style="height:calc(100% - 57px)" class="col-md-8"></div>
@@ -20,7 +20,7 @@
                     <optgroup label="neighbourhood">
                         @foreach (var item in Model.neighbourhoods)
                         {
-                            <option value="@item.Neighbourhood">@item.Neighbourhood</option>}
+                        <option value="@item.Neighbourhood">@item.Neighbourhood</option>}
                     </optgroup>
                     <optgroup label="price">
                         <option value="50"><= 50</option>
@@ -92,8 +92,8 @@
             </div>
         </div>
         @*
-            End graph section right side
-            Start Activity Tab
+        End graph section right side
+        Start Activity Tab
         *@
         <div class="row">
             <div class="col-md-6">
@@ -130,8 +130,8 @@
             </div>
         </div>
         @*
-            End Active right side
-            Start Availability Tab
+        End Active right side
+        Start Availability Tab
         *@
         <div class="row">
             <div class="col-md-6">
@@ -161,6 +161,45 @@
                 <p class="sub-text">Listings w <a class="black-link" href="#" data-toggle="tooltip" title="Low: <= 60 days/year">low</a> availability</p>
                 <b id="availabilityAverage">(COUNT) (%%)</b>
                 <p class="sub-text">days/year</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 chart-container no-padding" style="position: relative; height:20vh; width:60vh;">
+                <canvas id="availableChart"></canvas>
+            </div>
+            <div class="col-md-4 chart-container no-padding" style="position: relative; height:20vh; width:60vh;">
+                <canvas id="availablePieChart"></canvas>
+            </div>
+        </div>
+        @*
+        End Availability tab
+        Start listings count tab
+        *@
+        <div class="row">
+            <div class="col-md-6">
+                <b>Listings per host</b>
+            </div>
+            <div class="col-md-6" style="text-align: right;">
+                <label for="onlyMultiListingsPerHostCheckbox" style="font-size:10px">
+                    Only multi-listings
+                    <input id="onlyMultiListingsPerHostCheckbox" type="checkbox" name="onlyMultiListingsPerHostCheckbox" style="float:left" />
+                </label>
+            </div>
+        </div>
+        <hr class="separator" />
+        <div class="row" style="margin-right:3px;">
+            <div class="col-md-10">
+                <p>Some Airbnb hosts have multiple listings.</p>
+                <p>A host may list separate rooms in the same apartment, or multiple apartments or homes available in their entirity.</p>
+                <p>Hosts with multiple listings are more likely to be running a business, are unlikely to be living in the property, and in violation of most short term rental laws designed to protect residential housing.</p>
+            </div>
+            <div class="col-md-2 no-padding percentages">
+                <b id="multiListingPercentage">NNN (%%)</b>
+                <p class="sub-text">multi-listings</p>
+                <b id="singleListingPercentage">(COUNT) (%%)</b>
+                <p class="sub-text">single listings</p>
+                <b id="amountMultiListings">(COUNT) (%%)</b>
+                <p class="sub-text">multi-listings</p>
             </div>
         </div>
     </div>

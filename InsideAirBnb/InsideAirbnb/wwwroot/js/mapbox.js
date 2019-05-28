@@ -105,6 +105,7 @@
             //amout makers availability
             UpdateUI(features, amountApartments, amountPrivateRooms, amountSharedRooms);
             createChart(map, amountApartments, amountPrivateRooms, amountSharedRooms);
+            createAvailableCharts(map, features);
         });
     });
     
@@ -113,12 +114,13 @@
 function UpdateUI(features, amountApartments, amountPrivateRooms, amountSharedRooms) {
     var amountHighAvailable = features.filter(feature => feature.properties.availabilityStatus == "HIGH");
     var amountLowAvailable = features.filter(feature => feature.properties.availabilityStatus == "LOW");
+    var amountMultiListings = features.filter(feature => feature.properties.calculated_host_listings_count > 1);
     //Get average
     var availabilityAverage = CalcAverage(features);
     var apartmentsAverage = CalcAveragePrice(amountApartments);
     var nightsPerYearAverage = CalcAverageNightsPYear(features);
     var reviewListingsPerMonth = CalcAverageReviewsPerMonth(features);
-    var sum = getTotalReviews(features);
+    var totalReviews = getTotalReviews(features);
     //get percentage
     var apartmentsPercentage = ((amountApartments.length / features.length) * 100).toFixed(1);
     var privatePercentage = ((amountPrivateRooms.length / features.length) * 100).toFixed(1);
@@ -127,23 +129,27 @@ function UpdateUI(features, amountApartments, amountPrivateRooms, amountSharedRo
     var lowAvailablePercentage = ((amountLowAvailable.length / features.length) * 100).toFixed(1);
     var availabilitiAveragePercentage = ((availabilityAverage / 365) * 100).toFixed(1);
     var nightsPerYearPercentage = ((nightsPerYearAverage / 365) * 100).toFixed(1);
+    var multiListingPercentage = ((amountMultiListings.length / features.length) * 100).toFixed(1);
     //Update UI
     document.getElementById("number_listings_loaded").innerText = features.length;
     document.getElementById("priceTagApertments").innerText = apartmentsAverage.toFixed(1);
     document.getElementById("entireHomeApartmentsPercentage").innerText = apartmentsPercentage + "%";
     document.getElementById("EntireHomeCount").innerText = amountApartments.length + " (" + apartmentsPercentage + "%)";
-    document.getElementById("sharedRoomsCount").innerText = amountPrivateRooms.length + " (" + privatePercentage + "%)";
-    document.getElementById("privateRoomCount").innerText = amountSharedRooms.length + " (" + sharedPercentage + "%)";
+    document.getElementById("sharedRoomsCount").innerText = amountSharedRooms.length + " (" + sharedPercentage + "%)";
+    document.getElementById("privateRoomCount").innerText = amountPrivateRooms.length + " (" + privatePercentage + "%)";
     //activity tab
     document.getElementById("nightsPerYearAverage").innerText = nightsPerYearAverage.toFixed(1) + ` (${nightsPerYearPercentage}%)`;
     document.getElementById("reviewListingPerMonth").innerText = reviewListingsPerMonth.toFixed(1);
-    document.getElementById("totalReviewsPerMonth").innerText = sum;
-
-
+    document.getElementById("totalReviewsPerMonth").innerText = totalReviews;
+    //available tab
     document.getElementById("highAvailablityPercentage").innerText = highAvailablePercentage + "%";
     document.getElementById("amountHighAvailability").innerText = amountHighAvailable.length + " (" + highAvailablePercentage + "%)";
     document.getElementById("amountLowAvailability").innerText = amountLowAvailable.length + " (" + lowAvailablePercentage + "%)";
     document.getElementById("availabilityAverage").innerText = availabilityAverage.toFixed(1) + " (" + availabilitiAveragePercentage + "%)";
+    //listings tab
+    document.getElementById("multiListingPercentage").innerText = multiListingPercentage + "%";
+    document.getElementById("singleListingPercentage").innerText = (features.length - amountMultiListings.length) + " (" + (100 - multiListingPercentage) + "%)";
+    document.getElementById("amountMultiListings").innerText = amountMultiListings.length + " (" + multiListingPercentage + "%)";
 }
 function getTotalReviews(features) {
     var sum = 0;
