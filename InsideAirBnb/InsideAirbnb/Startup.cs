@@ -2,11 +2,14 @@ using InsideAirbnb.Models;
 using InsideAirbnb.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Threading.Tasks;
 
 namespace InsideAirbnb
 {
@@ -38,12 +41,13 @@ namespace InsideAirbnb
             services.AddRazorPages();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-
+            
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = "Cookies";
                 options.DefaultChallengeScheme = "oidc";
             })
+                
                 .AddCookie("Cookies")
                 .AddOpenIdConnect("oidc", options =>
                 {
@@ -79,7 +83,7 @@ namespace InsideAirbnb
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            //CreateUserRoles(services).Wait();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -88,5 +92,8 @@ namespace InsideAirbnb
                 endpoints.MapRazorPages();
             });
         }
+
+        
+
     }
 }

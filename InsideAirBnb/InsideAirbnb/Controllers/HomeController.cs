@@ -2,6 +2,7 @@
 using InsideAirbnb.Models.ViewModels;
 using InsideAirbnb.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,32 +26,19 @@ namespace InsideAirbnb.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            NeighbourhoodsViewModel viewModel = new NeighbourhoodsViewModel() { neighbourhoods = neighbourhoodRepo.GetAll() };
             HomeViewModel homeViewModel = new HomeViewModel() { neighbourhoods = neighbourhoodRepo.GetAll(), listings = listingRepo.GetAll() };
             return View(homeViewModel);
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetProductById(int id)
-        {
-            var product = neighbourhoodRepo.GetById(id);
-            if (product == null)
-            {
-                return NotFound("Het product is niet gevonden");
-            }
-            return Ok(product);
         }
         [Authorize]
         public IActionResult Privacy()
         {
             return View();
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+        //[Authorize]
         public IActionResult Claims()
         {
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-            return View(claims);
+            return Ok("NOTHING YET");
         }
         
         [Authorize]

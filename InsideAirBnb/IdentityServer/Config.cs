@@ -15,9 +15,9 @@ namespace IdentityServer
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
             var customProfile = new IdentityResource(
-        name: "user_status",
-        displayName: "user status",
-        claimTypes: new[] { "user_status" });
+            name: "user_status",
+            displayName: "user status",
+            claimTypes: new[] { "user_status" });
             return new IdentityResource[]
             {
                 new IdentityResources.OpenId(),
@@ -30,7 +30,8 @@ namespace IdentityServer
         {
             return new ApiResource[]
             {
-                new ApiResource("api1", "My API #1" ){UserClaims = { "user_status" }}
+                new ApiResource("api1", "My API #1" ),
+                
             };
         }
 
@@ -52,7 +53,7 @@ namespace IdentityServer
                     PostLogoutRedirectUris = { "https://localhost:44307/signout-callback-oidc" },
                     Claims = new []
                     {
-                        new Claim("Role", "Alice"),
+                        new Claim("user_status", "Admin"),
                     },
                     AlwaysSendClientClaims = true,
                     AlwaysIncludeUserClaimsInIdToken = true,
@@ -62,7 +63,6 @@ namespace IdentityServer
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
                         "openid",
-                        "user_status",
                         "profile",
                         "api1",
                         "Role"

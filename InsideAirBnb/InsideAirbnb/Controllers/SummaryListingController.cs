@@ -31,6 +31,8 @@ namespace InsideAirbnb.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            try
+            {
             var features = from sumItem in sumListingRepo.GetAll()
                             join listItem in listingsRepo.GetAll() on sumItem.Id equals listItem.Id
                             select new { sumItem = sumItem, item= listItem };
@@ -73,6 +75,12 @@ namespace InsideAirbnb.Controllers
                 })
             };
             return Ok(geo);
+            }
+            catch (Exception err)
+            {
+
+                return Ok(err);
+            }
         }
         [HttpGet("{id}")]
         public IActionResult GetProductById(int id)

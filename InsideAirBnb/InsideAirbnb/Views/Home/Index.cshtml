@@ -20,7 +20,7 @@
                     <optgroup label="neighbourhood">
                         @foreach (var item in Model.neighbourhoods)
                         {
-                        <option value="@item.Neighbourhood">@item.Neighbourhood</option>}
+                            <option value="@item.Neighbourhood">@item.Neighbourhood</option>}
                     </optgroup>
                     <optgroup label="price">
                         <option value="50"><= 50</option>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-6 center">
                 <div class="center">
-                    <h3># <text id="number_listings_loaded"></text> NUMBER LISTINGS LOADED</h3>
+                    <h3># <text id="number_listings_loaded"></text>@Model.listings.Count();</h3>
 
                 </div>
             </div>
@@ -79,7 +79,7 @@
                 <canvas id="myChart"></canvas>
             </div>
             <div class="col-md-2 no-padding percentages">
-                <b id="entireHomeApartmentsPercentage">NNN (%%)</b>
+                <b id="entireHomeApartmentsPercentage">@Model.apartmentsPercentage()</b>
                 <p class="sub-text">Entire homes/apartments</p>
                 &euro;<b id="priceTagApertments">PRICE</b>
                 <p class="sub-text">price/night</p>
@@ -201,6 +201,9 @@
                 <b id="amountMultiListings">(COUNT) (%%)</b>
                 <p class="sub-text">multi-listings</p>
             </div>
+        </div>
+        <div class="row chart-container no-padding" style="position: relative; height:20vh; width:100%;">
+            <canvas id="listingsPerHostChart"></canvas>
         </div>
     </div>
 </div>

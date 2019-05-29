@@ -8,6 +8,7 @@ $(document).ready(function () {
 function setMapFilter(map) {
     var FilterApertmentsCheckbox = document.querySelector("input[name=filterApertmentsOnly]");
     var onlyAvailabiltyCheckbox = document.querySelector("input[name=onlyAvailabiltyCheckbox]");
+    var onlyMultiListings = document.querySelector("input[name=onlyMultiListingsPerHostCheckbox]");
     var label = $('#map_filter :selected').parent().attr('label');
     var selectedValue = document.getElementById("map_filter").value;
     var filterBy = "=="
@@ -37,5 +38,6 @@ function setMapFilter(map) {
     }
     if (FilterApertmentsCheckbox.checked) mapFilters.push(["==", "room_type", "Entire home/apt"]);
     if (onlyAvailabiltyCheckbox.checked) mapFilters.push(["==", "availabilityStatus", "HIGH"]);
+    if (onlyMultiListings.checked) mapFilters.push([">", "calculated_host_listings_count", 1]);
     map.setFilter('locations_layer', mapFilters);
 }

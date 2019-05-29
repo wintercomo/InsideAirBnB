@@ -10,16 +10,18 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
+using System.Threading.Tasks;
 
 namespace IdentityServer
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        public IHostingEnvironment Environment { get; }
+        public IHostEnvironment Environment { get; }
 
-        public Startup(IConfiguration configuration, IHostingEnvironment environment)
+        public Startup(IConfiguration configuration, IHostEnvironment environment)
         {
             Configuration = configuration;
             Environment = environment;
@@ -43,11 +45,11 @@ namespace IdentityServer
                 options.Password.RequiredUniqueChars = 2;
 
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
-
             services.Configure<IISOptions>(iis =>
             {
                 iis.AuthenticationDisplayName = "Windows";
@@ -75,7 +77,7 @@ namespace IdentityServer
             }
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IServiceProvider services)
         {
             if (Environment.IsDevelopment())
             {
@@ -89,6 +91,8 @@ namespace IdentityServer
             app.UseStaticFiles();
             app.UseIdentityServer();
             app.UseMvcWithDefaultRoute();
+            CreateUserRoles(services).Wait();
         }
+        
     }
 }

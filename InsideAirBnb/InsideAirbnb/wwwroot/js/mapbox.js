@@ -52,6 +52,9 @@
     document.getElementById("map_filter").addEventListener("change", () => {
         setMapFilter(map);
     });
+    document.getElementById("onlyMultiListingsPerHostCheckbox").addEventListener("change", () => {
+        setMapFilter(map);
+    });
     map.on('load', function () {
         map.addLayer({
             "id": "locations_layer",
