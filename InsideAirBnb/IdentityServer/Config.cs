@@ -51,10 +51,7 @@ namespace IdentityServer
                     RedirectUris = { "https://localhost:44307/signin-oidc" },
                     FrontChannelLogoutUri = "https://localhost:44307/signout-oidc",
                     PostLogoutRedirectUris = { "https://localhost:44307/signout-callback-oidc" },
-                    Claims = new []
-                    {
-                        new Claim("user_status", "Admin"),
-                    },
+
                     AlwaysSendClientClaims = true,
                     AlwaysIncludeUserClaimsInIdToken = true,
                     AllowOfflineAccess = true,

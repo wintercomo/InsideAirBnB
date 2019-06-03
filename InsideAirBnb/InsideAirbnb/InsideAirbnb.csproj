@@ -17,4 +17,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0-preview5.19227.1" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\IdentityServer\IdentityServer.csproj" />
+  </ItemGroup>
+
 </Project>

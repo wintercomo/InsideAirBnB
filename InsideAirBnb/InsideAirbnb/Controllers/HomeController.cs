@@ -32,6 +32,9 @@ namespace InsideAirbnb.Controllers
         [Authorize]
         public IActionResult Privacy()
         {
+            var roles = ((ClaimsIdentity)User.Identity).Claims
+                .Where(c => c.Type == ClaimTypes.Role)
+                .Select(c => c.Value);
             return View();
         }
         [Authorize(Roles = "Admin")]

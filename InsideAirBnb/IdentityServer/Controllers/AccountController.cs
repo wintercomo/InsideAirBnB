@@ -23,6 +23,7 @@ namespace IdentityServerAspNetIdentity.Controllers
         {
             return View();
         }
+        [Authorize]
         [HttpGet]
         public async Task<ViewResult> RolesAsync()
         {

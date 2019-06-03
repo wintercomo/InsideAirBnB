@@ -1,3 +1,5 @@
+using IdentityServer.Data;
+using IdentityServer.Models;
 using InsideAirbnb.Models;
 using InsideAirbnb.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -41,7 +43,7 @@ namespace InsideAirbnb
             services.AddRazorPages();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-            
+
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = "Cookies";
@@ -61,7 +63,7 @@ namespace InsideAirbnb
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
@@ -83,7 +85,6 @@ namespace InsideAirbnb
 
             app.UseAuthentication();
             app.UseAuthorization();
-            //CreateUserRoles(services).Wait();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -91,9 +92,7 @@ namespace InsideAirbnb
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            //CreateUserRoles(services).GetAwaiter().GetResult();
         }
-
-        
-
     }
 }
