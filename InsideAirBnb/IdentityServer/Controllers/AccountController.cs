@@ -17,19 +17,10 @@ namespace IdentityServerAspNetIdentity.Controllers
         {
             _userManager = userManager;
         }
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ViewResult Register()
         {
             return View();
-        }
-        [Authorize]
-        [HttpGet]
-        public async Task<ViewResult> RolesAsync()
-        {
-            List<ApplicationUser> users = _userManager.Users.ToList();
-            IList<string> roles = await _userManager.GetRolesAsync(users.First());
-            return View(roles);
         }
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)

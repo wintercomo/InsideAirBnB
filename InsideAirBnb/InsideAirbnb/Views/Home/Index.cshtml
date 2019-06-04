@@ -79,15 +79,15 @@
                 <canvas id="myChart"></canvas>
             </div>
             <div class="col-md-2 no-padding percentages">
-                <b id="entireHomeApartmentsPercentage">@Model.apartmentsPercentage()</b>
+                <b id="">@Model.apartmentsPercentage()%</b>
                 <p class="sub-text">Entire homes/apartments</p>
-                &euro;<b id="priceTagApertments">PRICE</b>
+                &euro;<b id="priceTagApertments">@Model.PricePerNight().ToString("N2")</b>
                 <p class="sub-text">price/night</p>
-                <b id="EntireHomeCount">(COUNT) (%%)</b>
+                <b id="EntireHomeCount">@Model.AmountEntireHomeApartments().Count() (@Model.apartmentsPercentage()%)</b>
                 <p class="sub-text">Entire homes/apartments</p>
-                <b id="privateRoomCount">(COUNT) (%%)</b>
+                <b id="privateRoomCount">@Model.AmountPrivateListings().Count() (%%)</b>
                 <p class="sub-text">private rooms</p>
-                <b id="sharedRoomsCount">(COUNT) (%%)</b>
+                <b id="sharedRoomsCount">@Model.AmountSharedListings().Count() (%%)</b>
                 <p class="sub-text">shared rooms</p>
             </div>
         </div>

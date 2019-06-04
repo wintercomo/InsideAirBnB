@@ -14,16 +14,12 @@ namespace IdentityServer
     {
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
-            var customProfile = new IdentityResource(
-            name: "user_status",
-            displayName: "user status",
-            claimTypes: new[] { "user_status" });
             return new IdentityResource[]
-            {
+             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
-                customProfile
-            };
+                new IdentityResource("roles", new[] {"role" })
+             };
         }
 
         public static IEnumerable<ApiResource> GetApis()
@@ -31,16 +27,28 @@ namespace IdentityServer
             return new ApiResource[]
             {
                 new ApiResource("api1", "My API #1" ),
-                
+
             };
         }
 
         public static IEnumerable<Client> GetClients()
         {
             return new[]
-            {
+                        {
+                // client credentials flow client
+                new Client
+                {
+                    ClientId = "client",
+                    ClientName = "Client Credentials Client",
+
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
+
+                    AllowedScopes = { "api1" }
+                },
+
                 // MVC client using hybrid flow
-               new Client
+                new Client
                 {
                     ClientId = "mvc",
                     ClientName = "MVC Client",
@@ -52,19 +60,33 @@ namespace IdentityServer
                     FrontChannelLogoutUri = "https://localhost:44307/signout-oidc",
                     PostLogoutRedirectUris = { "https://localhost:44307/signout-callback-oidc" },
 
-                    AlwaysSendClientClaims = true,
-                    AlwaysIncludeUserClaimsInIdToken = true,
-                    AllowOfflineAccess = true,
-                    AllowedScopes = new List<string>{
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile,
-                        IdentityServerConstants.StandardScopes.Email,
-                        "openid",
-                        "profile",
-                        "api1",
-                        "Role"
-                    }
+                    AllowOfflineAccess = false,
+                    AllowedScopes = { "openid", "profile", "api1", "roles" }
                 },
+
+                // SPA client using implicit flow
+                new Client
+                {
+                    ClientId = "spa",
+                    ClientName = "SPA Client",
+                    ClientUri = "http://identityserver.io",
+
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris =
+                    {
+                        "http://localhost:5002/index.html",
+                        "http://localhost:5002/callback.html",
+                        "http://localhost:5002/silent.html",
+                        "http://localhost:5002/popup.html",
+                    },
+
+                    PostLogoutRedirectUris = { "http://localhost:5002/index.html" },
+                    AllowedCorsOrigins = { "http://localhost:5002" },
+
+                    AllowedScopes = { "openid", "profile", "api1" }
+                }
             };
         }
     }

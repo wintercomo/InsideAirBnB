@@ -134,10 +134,10 @@ function UpdateUI(features, amountApartments, amountPrivateRooms, amountSharedRo
     var nightsPerYearPercentage = ((nightsPerYearAverage / 365) * 100).toFixed(1);
     var multiListingPercentage = ((amountMultiListings.length / features.length) * 100).toFixed(1);
     //Update UI
-    document.getElementById("number_listings_loaded").innerText = features.length;
-    document.getElementById("priceTagApertments").innerText = apartmentsAverage.toFixed(1);
-    document.getElementById("entireHomeApartmentsPercentage").innerText = apartmentsPercentage + "%";
-    document.getElementById("EntireHomeCount").innerText = amountApartments.length + " (" + apartmentsPercentage + "%)";
+    //document.getElementById("number_listings_loaded").innerText = features.length;
+    //document.getElementById("priceTagApertments").innerText = apartmentsAverage.toFixed(1);
+    //document.getElementById("entireHomeApartmentsPercentage").innerText = apartmentsPercentage + "%";
+    //document.getElementById("EntireHomeCount").innerText = amountApartments.length + " (" + apartmentsPercentage + "%)";
     document.getElementById("sharedRoomsCount").innerText = amountSharedRooms.length + " (" + sharedPercentage + "%)";
     document.getElementById("privateRoomCount").innerText = amountPrivateRooms.length + " (" + privatePercentage + "%)";
     //activity tab

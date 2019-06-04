@@ -1,10 +1,11 @@
-using IdentityServer.Data;
 using IdentityServer.Models;
 using InsideAirbnb.Models;
 using InsideAirbnb.Repositories;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,12 +39,15 @@ namespace InsideAirbnb
             services.AddDbContext<insideAirBnbV2Context>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<IdentityServer.Data.ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("IdentityServerDB")));
             services.AddControllersWithViews()
                 .AddNewtonsoftJson();
             services.AddRazorPages();
-
+            
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = "Cookies";
@@ -58,8 +62,15 @@ namespace InsideAirbnb
                     options.ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
                     options.RequireHttpsMetadata = false;
                     options.Authority = "http://localhost:5000/";
+                    options.GetClaimsFromUserInfoEndpoint = true;
+                    options.Scope.Add("roles");
+                    options.ClaimActions.MapJsonKey("role", "role", "role");
+                    options.TokenValidationParameters.RoleClaimType = "role";
                 });
-
+            //services.AddDefaultIdentity<ApplicationUser>()
+            //    .AddRoles<IdentityRole>()
+            //    .AddDefaultUI(UIFramework.Bootstrap4)
+            //    .AddEntityFrameworkStores<IdentityServer.Data.ApplicationDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,7 +103,7 @@ namespace InsideAirbnb
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-            //CreateUserRoles(services).GetAwaiter().GetResult();
+            //CreateUserRoles(services).Wait();
         }
     }
 }

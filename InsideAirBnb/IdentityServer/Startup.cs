@@ -4,6 +4,8 @@
 
 using IdentityServer.Data;
 using IdentityServer.Models;
+using IdentityServer4.AspNetIdentity;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace IdentityServer
@@ -48,7 +51,7 @@ namespace IdentityServer
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            services.AddTransient<IProfileService, IdentityServer.ProfileServices>();
             services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
             services.Configure<IISOptions>(iis =>
             {
@@ -97,8 +100,7 @@ namespace IdentityServer
         private async Task CreateUserRoles(IServiceProvider serviceProvider)
         {
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
+            var _userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             IdentityResult roleResult;
             //Adding Admin Role
             var roleCheck = await RoleManager.RoleExistsAsync("Admin");
@@ -109,8 +111,9 @@ namespace IdentityServer
             }
             //Assign Admin role to the main User here we have given our newly registered 
             //login id for Admin management
-            ApplicationUser user = await UserManager.FindByNameAsync("wintercomo");
-            await UserManager.AddToRoleAsync(user, "Admin");
+            ApplicationUser user = await _userManager.FindByNameAsync("wintercomo");
+            
+
         }
 
     }
