@@ -41,3 +41,12 @@ function setMapFilter(map) {
     if (onlyMultiListings.checked) mapFilters.push([">", "calculated_host_listings_count", 1]);
     map.setFilter('locations_layer', mapFilters);
 }
+function showTopHosts() {
+    var currentStyle = document.getElementById("topHostList").style.display;
+    console.log(currentStyle)
+    if (currentStyle == "block") {
+        document.getElementById("topHostList").style.display = "none"
+    } else {
+        document.getElementById("topHostList").style.display = "block"
+    }
+}

@@ -35,10 +35,9 @@ namespace InsideAirbnb.Controllers
             return View(((ClaimsIdentity)User.Identity).Claims);
         }
         [Authorize(Roles = "Admin")]
-        //[Authorize]
         public IActionResult Claims()
         {
-            return Ok("NOTHING YET");
+            return Ok("YOU ARE ADMIN");
         }
         
         [Authorize]

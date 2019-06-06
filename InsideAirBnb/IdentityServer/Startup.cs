@@ -34,7 +34,7 @@ namespace IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("IdentityServerDB")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -94,7 +94,7 @@ namespace IdentityServer
             app.UseStaticFiles();
             app.UseIdentityServer();
             app.UseMvcWithDefaultRoute();
-            CreateUserRoles(services).GetAwaiter().GetResult();
+            CreateUserRoles(services).Wait();
         }
 
         private async Task CreateUserRoles(IServiceProvider serviceProvider)

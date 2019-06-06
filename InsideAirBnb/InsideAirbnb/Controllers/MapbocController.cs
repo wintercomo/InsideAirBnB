@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace InsideAirbnb.Controllers
 {
-    [Route("mapbox")]
+    [Route("test")]
     [ApiController]
     public class MapboxController : ControllerBase
     {
         private readonly IRepository<Neighbourhoods> repository;
-        private readonly IRepository<Listings> listingRepo;
+        private readonly IRepository<SummaryListings> listingRepo;
 
-        public MapboxController(IRepository<Neighbourhoods> repository, IRepository<Listings> listingRepo)
+        public MapboxController(IRepository<Neighbourhoods> repository, IRepository<SummaryListings> listingRepo)
         {
             this.repository = repository;
             this.listingRepo = listingRepo;
@@ -25,36 +25,54 @@ namespace InsideAirbnb.Controllers
         [HttpGet]
         public IActionResult GetAllData()
         {
-            //var listings = listingRepo.GetAll();
-            //var geo = "";
-            //listings.Take(100).ToList().ForEach(item =>
-            //{
-            //    geo += @"{
-            //            'type': 'Feature',
-            //            'geometry': {
-            //            'type': 'Point',
-            //            'coordinates': [" + item.Longitude.ToString().Insert(1, ".") + ", " + item.Latitude.ToString().Insert(2, ".") + @"]
-            //            },
-            //            'properties': {
-            //            'host_name': '" + item.HostName + @"',
-            //            'id': '" + item.Id + @"',
-            //            'calculated_host_listings_count' : '" + item.CalculatedHostListingsCount + @"',
-            //            'name' : 'Name Bugged',
-            //            'neighbourhood' : '" + item.Neighbourhood + @"',
-            //            'room_type' : '" + item.RoomType + @"',
-            //            'price' : '" + item.Price + @"',
-            //            'minimum_nights' : '" + item.MinimumNights + @"',
-            //            'reviews_per_month' : '" + item.ReviewsPerMonth + @"',
-            //            'number_of_reviews' : '" + item.NumberOfReviews + @"',
-            //            'last_review' : '" + item.LastReview + @"',
-            //            'availability_365' : '" + item.Availability365 + @"',
-            //        }},";
-            //});
-            //System.IO.File.Create(@"D:\path.json");
-            //System.IO.File.WriteAllText(@"D:\path.json", geo);
-            //string jsonFileContents = System.IO.File.ReadAllText(System.IO.Directory.GetCurrentDirectory() + @"\sharedRooms_geojson.json");
-            //object sharedRooms = JsonConvert.DeserializeObject(geo);
-            return Ok(listingRepo.GetAll().Take(100).ToList());
+            try
+            {
+                var features = listingRepo.GetAll();
+                var geo = new
+                {
+                    type = "FeatureCollection",
+                    features = features.Select(tt =>
+                    {
+                        var item = tt;
+                        //var fullItem = listingsRepo.GetById(item.Id);
+                        string availabilityStatus = "LOW"; // default
+                        if (item.Availability365 > 60) availabilityStatus = "HIGH";
+                        return new
+                        {
+                            type = "Feature",
+                            geometry = new
+                            {
+                                type = "Point",
+                                coordinates = new float[2] { float.Parse(item.Longitude.ToString().Insert(1, ".")), float.Parse(item.Latitude.ToString().Insert(2, ".")) }
+                            },
+                            properties = new
+                            {
+                                host_name = item.HostName,
+                                host_id = item.HostId,
+                                id = item.Id,
+                                calculated_host_listings_count = item.CalculatedHostListingsCount,
+                                name = "'" + item.Name + "'",
+                                neighbourhood = item.Neighbourhood,
+                                room_type = item.RoomType,
+                                price = tt.Price,
+                                minimum_nights = item.MinimumNights,
+                                reviews_per_month = item.ReviewsPerMonth,
+                                number_of_reviews = item.NumberOfReviews,
+                                last_review = item.LastReview,
+                                availabilityStatus,
+                                availability_365 = item.Availability365,
+                                review_rating = 0,
+                            },
+                        };
+                    })
+                };
+                return Ok(geo);
+            }
+            catch (Exception err)
+            {
+
+                return Ok(err);
+            }
         }
     }
 }

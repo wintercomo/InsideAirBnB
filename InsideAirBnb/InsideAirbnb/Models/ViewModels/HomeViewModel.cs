@@ -34,5 +34,9 @@ namespace InsideAirbnb.Models.ViewModels
         {
             return this.listings.Where(listing => listing.RoomType == "Private room");
         }
+        public IEnumerable<Listings> TopHosts()
+        {
+            return this.listings.OrderByDescending(i => i.HostTotalListingsCount).GroupBy(item => item.HostName).Select(listing => listing.First()).Take(20);
+        }
     }
 }

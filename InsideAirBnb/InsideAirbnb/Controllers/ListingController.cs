@@ -25,10 +25,10 @@ namespace InsideAirbnb.Controllers
                 type = "FeatureCollection",
                 features = _repository.GetAll().Select(item =>
                 {
-                    var parsedInt = 0;
+                    double parsedInt = 0;
                     try
                     {
-                        parsedInt = int.Parse(item.Price.Substring(1).Replace(".00", string.Empty));
+                        parsedInt = double.Parse(item.Price.Substring(1));
                     }
                     catch
                     {
