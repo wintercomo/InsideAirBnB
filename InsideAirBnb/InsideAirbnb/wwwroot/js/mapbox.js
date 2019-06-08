@@ -45,6 +45,7 @@
     var onlyAvailabiltyCheckbox = document.querySelector("input[name=onlyAvailabiltyCheckbox]");
     var maxPriceSlider = document.getElementById("multi");
     var numberOfReviewsSlider = document.getElementById("numberOfReviewsSlider");
+    var onlyRecentCheckbox = document.getElementById("onlyRecentCheckbox");
     maxPriceSlider.addEventListener('change', function () {
         document.getElementById("maxPriceTag").innerHTML = maxPriceSlider.value;
         setMapFilter(map);
@@ -54,6 +55,9 @@
         setMapFilter(map);
     });
     FilterApertmentsCheckbox.addEventListener('change', function () {
+        setMapFilter(map);
+    });
+    onlyRecentCheckbox.addEventListener('change', function () {
         setMapFilter(map);
     });
     onlyAvailabiltyCheckbox.addEventListener('change', function () {

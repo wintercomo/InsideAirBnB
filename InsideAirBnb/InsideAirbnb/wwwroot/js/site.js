@@ -13,7 +13,8 @@ function setMapFilter(map) {
     var minReviews = document.getElementById("numberOfReviewsSlider").value;
     var onlyHighActive = document.getElementById("onlyAvailabiltyCheckboc").checked;
     var onlyMultiListings = document.getElementById("onlyMultiListingsPerHostCheckbox").checked;
-    var fetchUrl = `/sum?${label}=${selectedValue}&ApartmentsOnly=${onlyApartments}&maxPrice=${maxPrice}&minReviews=${minReviews}&onlyHighActive=${onlyHighActive}&onlyMultiListings=${onlyMultiListings}`
+    var onlyRecentBooked = document.getElementById("onlyRecentCheckbox").checked;
+    var fetchUrl = `/sum?${label}=${selectedValue}&ApartmentsOnly=${onlyApartments}&maxPrice=${maxPrice}&minReviews=${minReviews}&onlyHighActive=${onlyHighActive}&onlyMultiListings=${onlyMultiListings}&onlyRecentBooked=${onlyRecentBooked}`
     window.history.pushState("", "", fetchUrl);
     map.removeLayer("locations_layer");
     map.removeSource("locations_layer");

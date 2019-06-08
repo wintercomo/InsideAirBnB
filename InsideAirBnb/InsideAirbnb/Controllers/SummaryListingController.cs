@@ -23,16 +23,22 @@ namespace InsideAirbnb.Controllers
             this.sumListingRepo = repository;
             this.listingsRepo = listingsRepo;
         }
-        [HttpGet]
-        public async Task<IActionResult> IndexAsync([FromQuery]string neighbourhood, [FromQuery]bool ApartmentsOnly, [FromQuery]int maxPrice, [FromQuery]int minReviews, [FromQuery]bool onlyHighActive, [FromQuery]bool onlyMultiListings)
+        public static int GetMonthDifference(DateTime startDate, DateTime endDate)
         {
-            Console.WriteLine(neighbourhood);
+            int monthsApart = 12 * (startDate.Year - endDate.Year) + startDate.Month - endDate.Month;
+            Console.WriteLine(monthsApart);
+            return Math.Abs(monthsApart);
+        }
+        [HttpGet]
+        public async Task<IActionResult> IndexAsync([FromQuery]string neighbourhood, [FromQuery]bool ApartmentsOnly, [FromQuery]int maxPrice, [FromQuery]int minReviews, [FromQuery]bool onlyHighActive, [FromQuery]bool onlyMultiListings, [FromQuery]bool onlyRecentBooked)
+        {
             object geo = null;
-            //if (RedisCacheService.GetInstance().KeyExists("SummaryListings"))
-            //{
-            //    geo = JsonConvert.DeserializeObject <object> (await RedisCacheService.GetInstance().StringGetAsync("SummaryListings"));
-            //    return Ok(geo);
-            //}
+            var filterString = neighbourhood + ApartmentsOnly + maxPrice + minReviews + onlyHighActive + onlyMultiListings + onlyRecentBooked;
+            if (RedisCacheService.GetInstance().KeyExists(filterString))
+            {
+                geo = JsonConvert.DeserializeObject<object>(await RedisCacheService.GetInstance().StringGetAsync(filterString));
+                return Ok(geo);
+            }
             try
             {
                 //var features = from sumItem in sumListingRepo.GetAll()
@@ -49,6 +55,7 @@ namespace InsideAirbnb.Controllers
                         .Where(l => l.NumberOfReviews >= minReviews)
                         .Where(l => l.Availability365 > 60 || !onlyHighActive) // or is !onlyHighActive then = .Where(true)
                         .Where(l => l.CalculatedHostListingsCount > 1 || !onlyMultiListings)
+                        .Where(l => l.LastReview != null && GetMonthDifference((DateTime)l.LastReview, DateTime.Now) >= -6 || !onlyRecentBooked)
                         .Select(item =>
                     {
                         string availabilityStatus = "LOW"; // default
@@ -81,7 +88,7 @@ namespace InsideAirbnb.Controllers
                         };
                     })
                 };
-                //RedisCacheService.GetInstance().StringSet("SummaryListings", JsonConvert.SerializeObject(geo), TimeSpan.FromDays(1));
+                RedisCacheService.GetInstance().StringSet(filterString, JsonConvert.SerializeObject(geo), TimeSpan.FromDays(1));
                 return Ok(geo);
             }
             catch (Exception err)

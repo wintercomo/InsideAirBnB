@@ -63,7 +63,7 @@ function createAvailableCharts(map, features) {
             labels: ["HIGH", "LOW"],
             datasets: [{
                 data: [amountHighAvailable.length, amountLowAvailable.length],
-                backgroundColor: ['#ec5242', '#3fb211']
+                backgroundColor: ['#B4B4B4', '#CCCCCC']
             }]
         }
         var listingsDataSet = {
