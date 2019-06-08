@@ -23,20 +23,16 @@ namespace InsideAirbnb.Controllers
             this.sumListingRepo = repository;
             this.listingsRepo = listingsRepo;
         }
-        public int? getReviews(int id)
+        [HttpGet]   
+        public async Task<IActionResult> IndexAsync([FromQuery]string neighbourhood,[FromQuery]bool ApartmentsOnly,[FromQuery]int maxPrice,[FromQuery]int minReviews)
         {
-            int? value = listingsRepo.GetById(id).ReviewScoresRating;
-            return value != null ? value : 0;
-        }
-        [HttpGet]
-        public async Task<IActionResult> IndexAsync()
-        {
+            Console.WriteLine(neighbourhood);
             object geo = null;
-            if (RedisCacheService.GetInstance().KeyExists("SummaryListings"))
-            {
-                geo = JsonConvert.DeserializeObject <object> (await RedisCacheService.GetInstance().StringGetAsync("SummaryListings"));
-                return Ok(geo);
-            }
+            //if (RedisCacheService.GetInstance().KeyExists("SummaryListings"))
+            //{
+            //    geo = JsonConvert.DeserializeObject <object> (await RedisCacheService.GetInstance().StringGetAsync("SummaryListings"));
+            //    return Ok(geo);
+            //}
             try
             {
                 var features = from sumItem in sumListingRepo.GetAll()
@@ -45,7 +41,12 @@ namespace InsideAirbnb.Controllers
                 geo = new
                 {
                     type = "FeatureCollection",
-                    features = features.Select(tt =>
+                    features = features
+                        .Where(listing => listing.sumItem.Neighbourhood == neighbourhood || neighbourhood == null)
+                        .Where(l => l.sumItem.RoomType == "Entire home/apt" || !ApartmentsOnly)
+                        .Where(l => l.sumItem.Price <= maxPrice)
+                        .Where(l => l.sumItem.NumberOfReviews >= minReviews)
+                        .Select(tt =>
                     {
                         var item = tt.sumItem;
                     //var fullItem = listingsRepo.GetById(item.Id);
@@ -80,7 +81,7 @@ namespace InsideAirbnb.Controllers
                         };
                     })
                 };
-                RedisCacheService.GetInstance().StringSet("SummaryListings", JsonConvert.SerializeObject(geo), TimeSpan.FromDays(1));
+                //RedisCacheService.GetInstance().StringSet("SummaryListings", JsonConvert.SerializeObject(geo), TimeSpan.FromDays(1));
                 return Ok(geo);
             }
             catch (Exception err)
@@ -89,15 +90,16 @@ namespace InsideAirbnb.Controllers
                 return Ok(err);
             }
         }
-        [HttpGet("{id}")]
-        public IActionResult GetProductById(int id)
-        {
-            var product = listingsRepo.GetById(id);
-            if (product == null)
-            {
-                return NotFound("Het product is niet gevonden");
-            }
-            return Ok(product.ReviewScoresRating);
-        }
+        //[HttpGet("{id}")]
+        //public IActionResult GetProductById(int id)
+        //{
+        //    var product = listingsRepo.GetById(id);
+        //    if (product == null)
+        //    {
+        //        return NotFound("Het product is niet gevonden");
+        //    }
+        //    return Ok(product.ReviewScoresRating);
+        //}
+        
     }
 }

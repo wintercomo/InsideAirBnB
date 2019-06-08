@@ -16,9 +16,9 @@ namespace InsideAirbnb.Controllers
     public class HomeController : Controller
     {
         private readonly IRepository<Neighbourhoods> neighbourhoodRepo;
-        private readonly IRepository<Listings> listingRepo;
+        private readonly IRepository<SummaryListings> listingRepo;
 
-        public HomeController(IRepository<Neighbourhoods> repository, IRepository<Listings> listingRepo)
+        public HomeController(IRepository<Neighbourhoods> repository, IRepository<SummaryListings> listingRepo)
         {
             this.neighbourhoodRepo = repository;
             this.listingRepo = listingRepo;

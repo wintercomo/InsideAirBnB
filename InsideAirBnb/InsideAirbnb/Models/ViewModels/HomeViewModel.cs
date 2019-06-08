@@ -8,7 +8,7 @@ namespace InsideAirbnb.Models.ViewModels
     public class HomeViewModel
     {
         public IEnumerable<Neighbourhoods> neighbourhoods { get; set; }
-        public IEnumerable<Listings> listings { get; set; }
+        public IEnumerable<SummaryListings> listings { get; set; }
 
         public double apartmentsPercentage()
         {
@@ -18,25 +18,25 @@ namespace InsideAirbnb.Models.ViewModels
         }
         public double PricePerNight()
         {
-            double priceSum = AmountEntireHomeApartments().Select(item => item.Price).Sum(item => double.Parse(item.Substring(1)));
-            return priceSum / this.listings.Count();
+            //double priceSum = AmountEntireHomeApartments().Select(item => item.Price).Sum(item => double.Parse(item.Substring(1)));
+            return this.listings.Count();
         }
 
-        public IEnumerable<Listings> AmountEntireHomeApartments()
+        public IEnumerable<SummaryListings> AmountEntireHomeApartments()
         {
             return this.listings.Where(listing => listing.RoomType == "Entire home/apt");
         }
-        public IEnumerable<Listings> AmountSharedListings()
+        public IEnumerable<SummaryListings> AmountSharedListings()
         {
             return this.listings.Where(listing => listing.RoomType == "Shared room");
         }
-        public IEnumerable<Listings> AmountPrivateListings()
+        public IEnumerable<SummaryListings> AmountPrivateListings()
         {
             return this.listings.Where(listing => listing.RoomType == "Private room");
         }
-        public IEnumerable<Listings> TopHosts()
+        public IEnumerable<SummaryListings> TopHosts()
         {
-            return this.listings.OrderByDescending(i => i.HostTotalListingsCount).GroupBy(item => item.HostName).Select(listing => listing.First()).Take(20);
+            return this.listings.OrderByDescending(i => i.CalculatedHostListingsCount).GroupBy(item => item.HostName).Select(listing => listing.First()).Take(20);
         }
     }
 }

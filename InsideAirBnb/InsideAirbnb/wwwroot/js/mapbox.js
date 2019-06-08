@@ -43,6 +43,16 @@
     // Event listeners
     var FilterApertmentsCheckbox = document.querySelector("input[name=filterApertmentsOnly]");
     var onlyAvailabiltyCheckbox = document.querySelector("input[name=onlyAvailabiltyCheckbox]");
+    var maxPriceSlider = document.getElementById("multi");
+    var numberOfReviewsSlider = document.getElementById("numberOfReviewsSlider");
+    maxPriceSlider.addEventListener('change', function () {
+        document.getElementById("maxPriceTag").innerHTML = maxPriceSlider.value;
+        setMapFilter(map);
+    });
+    numberOfReviewsSlider.addEventListener('change', function () {
+        document.getElementById("minReviewTag").innerHTML = numberOfReviewsSlider.value;
+        setMapFilter(map);
+    });
     FilterApertmentsCheckbox.addEventListener('change', function () {
         setMapFilter(map);
     });
@@ -51,6 +61,8 @@
     });
     document.getElementById("map_filter").addEventListener("change", () => {
         setMapFilter(map);
+        
+        //map.addSource('locations_layer', { type: 'geojson', data: "/sum?neighbourhood=Centrum-Oost" });
     });
     document.getElementById("onlyMultiListingsPerHostCheckbox").addEventListener("change", () => {
         setMapFilter(map);
@@ -109,6 +121,14 @@
             UpdateUI(features, amountApartments, amountPrivateRooms, amountSharedRooms);
             createChart(map, amountApartments, amountPrivateRooms, amountSharedRooms);
             createAvailableCharts(map, features);
+            //var FilterApertmentsCheckbox = document.querySelector("input[name=filterApertmentsOnly]");
+            //var onlyAvailabiltyCheckbox = document.querySelector("input[name=onlyAvailabiltyCheckbox]");
+            //var onlyMultiListings = document.querySelector("input[name=onlyMultiListingsPerHostCheckbox]");
+            //let mapFilters = ["all"];
+            //if (FilterApertmentsCheckbox.checked) mapFilters.push(["==", "room_type", "Entire home/apt"]);
+            //if (onlyAvailabiltyCheckbox.checked) mapFilters.push(["==", "availabilityStatus", "HIGH"]);
+            //if (onlyMultiListings.checked) mapFilters.push([">", "calculated_host_listings_count", 1]);
+            //map.setFilter('locations_layer', mapFilters);
         });
     });
     

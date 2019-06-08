@@ -94,7 +94,7 @@ namespace IdentityServer
             app.UseStaticFiles();
             app.UseIdentityServer();
             app.UseMvcWithDefaultRoute();
-            CreateUserRoles(services).Wait();
+            //CreateUserRoles(services).Wait();
         }
 
         private async Task CreateUserRoles(IServiceProvider serviceProvider)
