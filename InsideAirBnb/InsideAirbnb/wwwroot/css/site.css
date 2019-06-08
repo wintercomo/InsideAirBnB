@@ -83,3 +83,6 @@ body {
     color:black;
     text-decoration:underline;
 }
+.error{
+    color: red
+}

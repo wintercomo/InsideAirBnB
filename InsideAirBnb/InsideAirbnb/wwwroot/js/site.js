@@ -11,6 +11,10 @@ function setMapFilter(map) {
     var onlyApartments = document.getElementById("apartmentFilterCheckbox").checked;
     var maxPrice = document.getElementById("multi").value;
     var minReviews = document.getElementById("numberOfReviewsSlider").value;
+    var onlyHighActive = document.getElementById("onlyAvailabiltyCheckboc").checked;
+    var onlyMultiListings = document.getElementById("onlyMultiListingsPerHostCheckbox").checked;
+    var fetchUrl = `/sum?${label}=${selectedValue}&ApartmentsOnly=${onlyApartments}&maxPrice=${maxPrice}&minReviews=${minReviews}&onlyHighActive=${onlyHighActive}&onlyMultiListings=${onlyMultiListings}`
+    window.history.pushState("", "", fetchUrl);
     map.removeLayer("locations_layer");
     map.removeSource("locations_layer");
     map.addLayer({
@@ -18,7 +22,7 @@ function setMapFilter(map) {
         "type": "circle",
         "source": {
             "type": "geojson",
-            "data": `/sum?${label}=${selectedValue}&ApartmentsOnly=${onlyApartments}&maxPrice=${maxPrice}&minReviews=${minReviews}`,
+            "data": fetchUrl,
         },
         'paint': {
             'circle-radius': {

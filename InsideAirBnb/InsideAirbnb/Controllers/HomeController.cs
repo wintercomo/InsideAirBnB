@@ -1,14 +1,18 @@
 ﻿using InsideAirbnb.Models;
 using InsideAirbnb.Models.ViewModels;
 using InsideAirbnb.Repositories;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace InsideAirbnb.Controllers
@@ -26,6 +30,8 @@ namespace InsideAirbnb.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            // localhost/alle data
+
             HomeViewModel homeViewModel = new HomeViewModel() { neighbourhoods = neighbourhoodRepo.GetAll(), listings = listingRepo.GetAll() };
             return View(homeViewModel);
         }
@@ -37,9 +43,18 @@ namespace InsideAirbnb.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Claims()
         {
-            return Ok("YOU ARE ADMIN");
+            return Ok("Welcome to the admin screen!");
         }
-        
+        [Authorize]
+        public IActionResult Login()
+        {
+            return Redirect("/home");
+        }
+        public async Task<IActionResult> LogoutAsync()
+        {
+            await HttpContext.SignOutAsync();
+            return Redirect("/home");
+        }
         [Authorize]
         public IActionResult Secure()
         {
@@ -50,6 +65,30 @@ namespace InsideAirbnb.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        string GET(string url)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            try
+            {
+                WebResponse response = request.GetResponse();
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    return reader.ReadToEnd();
+                }
+            }
+            catch (WebException ex)
+            {
+                WebResponse errorResponse = ex.Response;
+                using (Stream responseStream = errorResponse.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
+                    String errorText = reader.ReadToEnd();
+                    return errorText;
+                }
+                throw;
+            }
         }
     }
 }

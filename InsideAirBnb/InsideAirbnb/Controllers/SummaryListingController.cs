@@ -23,8 +23,8 @@ namespace InsideAirbnb.Controllers
             this.sumListingRepo = repository;
             this.listingsRepo = listingsRepo;
         }
-        [HttpGet]   
-        public async Task<IActionResult> IndexAsync([FromQuery]string neighbourhood,[FromQuery]bool ApartmentsOnly,[FromQuery]int maxPrice,[FromQuery]int minReviews)
+        [HttpGet]
+        public async Task<IActionResult> IndexAsync([FromQuery]string neighbourhood, [FromQuery]bool ApartmentsOnly, [FromQuery]int maxPrice, [FromQuery]int minReviews, [FromQuery]bool onlyHighActive, [FromQuery]bool onlyMultiListings)
         {
             Console.WriteLine(neighbourhood);
             object geo = null;
@@ -35,23 +35,24 @@ namespace InsideAirbnb.Controllers
             //}
             try
             {
-                var features = from sumItem in sumListingRepo.GetAll()
-                               join listItem in listingsRepo.GetAll() on sumItem.Id equals listItem.Id
-                               select new { sumItem = sumItem, item = listItem };
+                //var features = from sumItem in sumListingRepo.GetAll()
+                //               join listItem in listingsRepo.GetAll() on sumItem.Id equals listItem.Id
+                //               select new { sumItem = sumItem, item = listItem };
+                var features = sumListingRepo.GetAll();
                 geo = new
                 {
                     type = "FeatureCollection",
                     features = features
-                        .Where(listing => listing.sumItem.Neighbourhood == neighbourhood || neighbourhood == null)
-                        .Where(l => l.sumItem.RoomType == "Entire home/apt" || !ApartmentsOnly)
-                        .Where(l => l.sumItem.Price <= maxPrice)
-                        .Where(l => l.sumItem.NumberOfReviews >= minReviews)
-                        .Select(tt =>
+                        .Where(listing => listing.Neighbourhood == neighbourhood || neighbourhood == null)
+                        .Where(l => l.RoomType == "Entire home/apt" || !ApartmentsOnly)
+                        .Where(l => l.Price <= maxPrice)
+                        .Where(l => l.NumberOfReviews >= minReviews)
+                        .Where(l => l.Availability365 > 60 || !onlyHighActive) // or is !onlyHighActive then = .Where(true)
+                        .Where(l => l.CalculatedHostListingsCount > 1 || !onlyMultiListings)
+                        .Select(item =>
                     {
-                        var item = tt.sumItem;
-                    //var fullItem = listingsRepo.GetById(item.Id);
-                    string availabilityStatus = "LOW"; // default
-                    if (item.Availability365 > 60) availabilityStatus = "HIGH";
+                        string availabilityStatus = "LOW"; // default
+                        if (item.Availability365 > 60) availabilityStatus = "HIGH";
                         return new
                         {
                             type = "Feature",
@@ -69,14 +70,13 @@ namespace InsideAirbnb.Controllers
                                 name = "'" + item.Name + "'",
                                 neighbourhood = item.Neighbourhood,
                                 room_type = item.RoomType,
-                                price = tt.sumItem.Price,
+                                price = item.Price,
                                 minimum_nights = item.MinimumNights,
                                 reviews_per_month = item.ReviewsPerMonth,
                                 number_of_reviews = item.NumberOfReviews,
                                 last_review = item.LastReview,
                                 availabilityStatus,
                                 availability_365 = item.Availability365,
-                                review_rating = tt.item.ReviewScoresValue,
                             },
                         };
                     })
@@ -90,16 +90,5 @@ namespace InsideAirbnb.Controllers
                 return Ok(err);
             }
         }
-        //[HttpGet("{id}")]
-        //public IActionResult GetProductById(int id)
-        //{
-        //    var product = listingsRepo.GetById(id);
-        //    if (product == null)
-        //    {
-        //        return NotFound("Het product is niet gevonden");
-        //    }
-        //    return Ok(product.ReviewScoresRating);
-        //}
-        
     }
 }

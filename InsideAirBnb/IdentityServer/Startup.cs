@@ -33,8 +33,10 @@ namespace IdentityServer
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("IdentityServerDB"))); // Database for azure
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("IdentityServerDB")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // Database for local testing /debugging
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {

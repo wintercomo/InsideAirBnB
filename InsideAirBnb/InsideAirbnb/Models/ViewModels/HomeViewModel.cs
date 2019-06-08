@@ -9,7 +9,7 @@ namespace InsideAirbnb.Models.ViewModels
     {
         public IEnumerable<Neighbourhoods> neighbourhoods { get; set; }
         public IEnumerable<SummaryListings> listings { get; set; }
-
+        public object mapFeatures{ get; set; }
         public double apartmentsPercentage()
         {
             int amountEntireHomes =  this.listings.Where(listing => listing.RoomType == "Entire home/apt").Count();

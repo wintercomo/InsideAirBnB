@@ -1,6 +1,7 @@
 using InsideAirbnb.Models;
 using InsideAirbnb.Repositories;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -61,11 +62,21 @@ namespace InsideAirbnb
                     options.ClientId = "mvc";
                     options.ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
                     options.RequireHttpsMetadata = false;
-                    options.Authority = "http://identityserver20190606022426.azurewebsites.net:80/";
+                    //options.Authority = "http://identityserver20190606022426.azurewebsites.net:80/"; // Login url for hosting on azure
+                    options.Authority = "http://localhost:5000/"; // Login url for local testing / debugging
                     options.GetClaimsFromUserInfoEndpoint = true;
                     options.Scope.Add("roles");
                     options.ClaimActions.MapJsonKey("role", "role", "role");
                     options.TokenValidationParameters.RoleClaimType = "role";
+                    options.Events = new OpenIdConnectEvents
+                    {
+                        OnRemoteFailure = context => {
+                            context.Response.Redirect("/");
+                            context.HandleResponse();
+
+                            return Task.FromResult(0);
+                        }
+                    };
                 });
         }
 
