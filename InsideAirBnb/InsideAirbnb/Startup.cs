@@ -54,7 +54,6 @@ namespace InsideAirbnb
                 options.DefaultScheme = "Cookies";
                 options.DefaultChallengeScheme = "oidc";
             })
-                
                 .AddCookie("Cookies")
                 .AddOpenIdConnect("oidc", options =>
                 {

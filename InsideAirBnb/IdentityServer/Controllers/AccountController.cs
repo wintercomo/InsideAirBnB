@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using IdentityServer4.Quickstart.UI;
 
 namespace IdentityServerAspNetIdentity.Controllers
 {
@@ -21,6 +22,22 @@ namespace IdentityServerAspNetIdentity.Controllers
         public ViewResult Register()
         {
             return View();
+        }
+        [Route("/edit")]
+        [HttpGet]
+        public async Task<IActionResult> EditAsync([FromQuery]string name, [FromQuery]string newName)
+        {
+            var claims = ((ClaimsIdentity)User.Identity).Claims;
+            string CurrentUserName = User.Identity.Name;
+            if (CurrentUserName == name)
+            {
+            Claim claim = User.Claims.First();
+            ApplicationUser user = await _userManager.FindByNameAsync(name);
+            user.UserName = newName;
+            await _userManager.UpdateAsync(user);
+                return Redirect("https://localhost:44307/Account/PersonalInfo?success=true");
+            }
+            return Redirect("https://localhost:44307/Account/PersonalInfo?success=fail");
         }
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)

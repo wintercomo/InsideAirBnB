@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="InsideAirbnb.Repositories.ListingRepository" BaseTypeListCollapsed="true">
+    <Position X="16" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>Repositories\ListingRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="InsideAirbnb.Repositories.NeighbourhoodRepository" BaseTypeListCollapsed="true">
+    <Position X="15.5" Y="6.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>Repositories\NeighbourhoodRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="InsideAirbnb.Repositories.SummaryListingReposity" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="4.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAABAAAA=</HashCode>
+      <FileName>Repositories\SummaryListingReposity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="InsideAirbnb.Models.ViewModels.HomeViewModel">
+    <Position X="17.75" Y="9" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAABAIAEAAAAAAAAAABIAgAAAAQAAABA=</HashCode>
+      <FileName>Models\ViewModels\HomeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Models.ViewModels.NeighbourhoodsViewModel">
+    <Position X="22.5" Y="1.75" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ViewModels\NeighbourhoodsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Models.Calendar">
+    <Position X="20" Y="3" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAKAAAAAQAABAAAAAAAAABAAAAAAAABAAAAAAAABAA=</HashCode>
+      <FileName>Models\Calendar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Models.ErrorViewModel">
+    <Position X="22.5" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ErrorViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Models.insideAirBnbV2Context">
+    <Position X="4" Y="0.5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>IQAAAEAAAAAAAAAAAAAAAAAAEAAAAAAFAAAQAAAAAAA=</HashCode>
+      <FileName>Models\insideAirBnbV2Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Models.Listings" Collapsed="true">
+    <Position X="22.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gLCzBOEyAUD4nkYeLiEICQ4QAIpICgrFJAISBbESAAA=</HashCode>
+      <FileName>Models\Listings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Models.Neighbourhoods">
+    <Position X="22.5" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Models\Neighbourhoods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Models.Reviews">
+    <Position X="19.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAAAAABAABAAAAAAAAAAAAAAAAAABAAAEAAAAIAA=</HashCode>
+      <FileName>Models\Reviews.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Models.SummaryListings">
+    <Position X="22.5" Y="6.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>gCACAAAAAUAAAAAAAAEIAAUAAAAAAAAAJAAAAIECAAA=</HashCode>
+      <FileName>Models\SummaryListings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Models.SummaryReviews">
+    <Position X="20" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAABAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SummaryReviews.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Controllers.AccountController">
+    <Position X="11.25" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Controllers.HomeController">
+    <Position X="7" Y="8.75" Width="6.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAQAAEAQAABAAAAAAAAAAAAQAAAAEQAAAAACA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Controllers.ListingController">
+    <Position X="10" Y="2.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\ListingController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Controllers.MapboxController">
+    <Position X="3" Y="3.75" Width="6.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAABAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\MapbocController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Controllers.NeighbourhoodController">
+    <Position X="9" Y="0.5" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAEAAAAAAQA=</HashCode>
+      <FileName>Controllers\NeighbourhoodController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Controllers.SummaryListingController">
+    <Position X="2.75" Y="6.25" Width="10.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAEACAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\SummaryListingController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Services.RedisCacheService">
+    <Position X="0.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAABAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\RedisCacheService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Migrations.RemovedLoginTables" Collapsed="true">
+    <Position X="13.75" Y="3.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20190516162636_RemovedLoginTables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsideAirbnb.Migrations.insideAirBnbV2ContextModelSnapshot">
+    <Position X="22.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Migrations\insideAirBnbV2ContextModelSnapshot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="InsideAirbnb.Repositories.IRepository&lt;T&gt;">
+    <Position X="17.5" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>Repositories\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

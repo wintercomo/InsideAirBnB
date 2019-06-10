@@ -3,6 +3,7 @@ using InsideAirbnb.Models.ViewModels;
 using InsideAirbnb.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -31,7 +32,14 @@ namespace InsideAirbnb.Controllers
         public IActionResult Index()
         {
             // localhost/alle data
-
+            Response.Headers.Add("X-Frame-Options", "DENY");
+    //        HttpContext.Response.Cookies.Append(
+    //"CookieKey",
+    //"CookieValue",
+    //new CookieOptions
+    //{
+    //    HttpOnly = true
+    //});
             HomeViewModel homeViewModel = new HomeViewModel() { neighbourhoods = neighbourhoodRepo.GetAll(), listings = listingRepo.GetAll() };
             return View(homeViewModel);
         }
@@ -41,13 +49,14 @@ namespace InsideAirbnb.Controllers
             return View(((ClaimsIdentity)User.Identity).Claims);
         }
         [Authorize(Roles = "Admin")]
-        public IActionResult Claims()
+        public IActionResult Admin()
         {
-            return Ok("Welcome to the admin screen!");
+            return View();
         }
         [Authorize]
         public IActionResult Login()
         {
+            
             return Redirect("/home");
         }
         public async Task<IActionResult> LogoutAsync()

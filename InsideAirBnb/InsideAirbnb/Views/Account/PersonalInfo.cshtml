@@ -1,0 +1,23 @@
+﻿@model IEnumerable<System.Security.Claims.Claim>
+@{
+    ViewData["Title"] = "Personal Info";
+    string username = Model.First(item => item.Type == "name").Value;
+    var isAdmin = Model.First(item => item.Type == "role").Value == "Admin";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this age to change your personal info.</p>
+<form asp-action="EditPersonalInfo">
+    <div class="form-group">
+        <label asp-for="@username" class="control-label"></label>
+        <input asp-for="@username" class="form-control" />
+        <span asp-validation-for="@username" class="text-danger"></span>
+    </div>
+    <label for="isAdmin">
+        User had admin role:
+    </label>
+    <input id="isAdmin" type="checkbox" name="isAdmin" checked="@isAdmin" disabled="disabled"/>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>

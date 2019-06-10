@@ -51,13 +51,13 @@ namespace InsideAirbnb.Controllers
                     features = features
                         .Where(listing => listing.Neighbourhood == neighbourhood || neighbourhood == null)
                         .Where(l => l.RoomType == "Entire home/apt" || !ApartmentsOnly)
-                        .Where(l => l.Price <= maxPrice)
+                        .Where(l => l.Price <= maxPrice || maxPrice == 0)
                         .Where(l => l.NumberOfReviews >= minReviews)
                         .Where(l => l.Availability365 > 60 || !onlyHighActive) // or is !onlyHighActive then = .Where(true)
                         .Where(l => l.CalculatedHostListingsCount > 1 || !onlyMultiListings)
                         .Where(l => l.LastReview != null && GetMonthDifference((DateTime)l.LastReview, DateTime.Now) >= -6 || !onlyRecentBooked)
                         .Select(item =>
-                    {
+                    { //Create the geoJson object
                         string availabilityStatus = "LOW"; // default
                         if (item.Availability365 > 60) availabilityStatus = "HIGH";
                         return new

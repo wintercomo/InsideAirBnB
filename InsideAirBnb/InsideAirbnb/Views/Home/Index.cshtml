@@ -36,11 +36,11 @@
         <div class="row">
             <div class="col-md-6">
                 <p>Max price</p>
-                <input id="multi" min="0" max="@Model.listings.Max(l => l.Price)" class="multi-range" type="range" /> <p id="maxPriceTag">10</p>
+                <input id="multi" min="0" max="@Model.listings.Max(l => l.Price)" value="@Model.listings.Max(l => l.Price)" class="multi-range" type="range" /> <p id="maxPriceTag">10</p>
             </div>
             <div class="col-md-6">
                 <p>Minimal amount of reviews</p>
-                <input id="numberOfReviewsSlider" min="0" max="@Model.listings.Max(l => l.NumberOfReviews)" class="multi-range" type="range" /> <p id="minReviewTag">10</p>
+                <input id="numberOfReviewsSlider" min="0" max="@Model.listings.Max(l => l.NumberOfReviews)" value="0" class="multi-range" type="range" /> <p id="minReviewTag">10</p>
             </div>
         </div>
         <hr />
