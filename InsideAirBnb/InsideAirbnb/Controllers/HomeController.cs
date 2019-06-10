@@ -33,13 +33,17 @@ namespace InsideAirbnb.Controllers
         {
             // localhost/alle data
             Response.Headers.Add("X-Frame-Options", "DENY");
-    //        HttpContext.Response.Cookies.Append(
-    //"CookieKey",
-    //"CookieValue",
-    //new CookieOptions
-    //{
-    //    HttpOnly = true
-    //});
+            
+            //custom cookie
+            HttpContext.Response.Cookies.Append(
+                "CookieKey",
+                "CookieValue",
+                new CookieOptions
+                {
+                    HttpOnly = true
+                }
+            );
+
             HomeViewModel homeViewModel = new HomeViewModel() { neighbourhoods = neighbourhoodRepo.GetAll(), listings = listingRepo.GetAll() };
             return View(homeViewModel);
         }

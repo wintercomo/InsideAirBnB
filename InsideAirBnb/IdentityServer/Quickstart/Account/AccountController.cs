@@ -122,7 +122,6 @@ namespace IdentityServer4.Quickstart.UI
                         // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
                         return Redirect(model.ReturnUrl);
                     }
-
                     // request for a local page
                     if (Url.IsLocalUrl(model.ReturnUrl))
                     {
@@ -137,6 +136,11 @@ namespace IdentityServer4.Quickstart.UI
                         // user might have clicked on a malicious link - should be logged
                         throw new Exception("invalid return URL");
                     }
+                }
+
+                if (result.IsLockedOut)
+                {
+                    return View("LockedOut");
                 }
 
                 await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials"));

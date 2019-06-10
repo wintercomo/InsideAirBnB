@@ -35,9 +35,11 @@ namespace IdentityServerAspNetIdentity.Controllers
             ApplicationUser user = await _userManager.FindByNameAsync(name);
             user.UserName = newName;
             await _userManager.UpdateAsync(user);
-                return Redirect("https://localhost:44307/Account/PersonalInfo?success=true");
+                //return Redirect("https://localhost:44307/Account/PersonalInfo?success=true");
+                return Redirect("https://insideairbnb20190605035229.azurewebsites.net/Account/PersonalInfo?success=true");
             }
-            return Redirect("https://localhost:44307/Account/PersonalInfo?success=fail");
+            //return Redirect("https://localhost:44307/Account/PersonalInfo?success=fail");
+            return Redirect("https://insideairbnb20190605035229.azurewebsites.net/Account/PersonalInfo?success=fail");
         }
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)

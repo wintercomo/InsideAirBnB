@@ -57,14 +57,14 @@ namespace IdentityServer
                     ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
 
                     // correct url redirects for hosting on azure
-                    //RedirectUris = { "https://insideairbnb20190605035229.azurewebsites.net/signin-oidc" },
-                    //FrontChannelLogoutUri = "https://insideairbnb20190605035229.azurewebsites.net/signout-oidc",
-                    //PostLogoutRedirectUris = { "https://insideairbnb20190605035229.azurewebsites.net/signout-callback-oidc" },
+                    RedirectUris = { "https://insideairbnb20190605035229.azurewebsites.net/signin-oidc" },
+                    FrontChannelLogoutUri = "https://insideairbnb20190605035229.azurewebsites.net/signout-oidc",
+                    PostLogoutRedirectUris = { "https://insideairbnb20190605035229.azurewebsites.net/signout-callback-oidc" },
 
                     // correct redirect urls for local testing
-                    RedirectUris = { "https://localhost:44307/signin-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:44307/signout-oidc",
-                    PostLogoutRedirectUris = { "https://localhost:44307/signout-callback-oidc" },
+                    //RedirectUris = { "https://localhost:44307/signin-oidc" },
+                    //FrontChannelLogoutUri = "https://localhost:44307/signout-oidc",
+                    //PostLogoutRedirectUris = { "https://localhost:44307/signout-callback-oidc" },
 
                     AllowOfflineAccess = false,
                     AllowedScopes = { "openid", "profile", "api1", "roles" }

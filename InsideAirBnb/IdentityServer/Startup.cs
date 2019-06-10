@@ -33,13 +33,16 @@ namespace IdentityServer
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ApplicationDbContext>(options =>
-              //  options.UseSqlServer(Configuration.GetConnectionString("IdentityServerDB"))); // Database for azure
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // Database for local testing /debugging
+                options.UseSqlServer(Configuration.GetConnectionString("IdentityServerDB"))); // Database for azure
+            //services.AddDbContext<ApplicationDbContext>(options =>
+              //  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // Database for local testing /debugging
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+                options.Lockout.MaxFailedAccessAttempts = 3;
+
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;

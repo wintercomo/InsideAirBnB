@@ -29,7 +29,8 @@ namespace InsideAirbnb.Controllers
         public IActionResult EditPersonalInfo([FromForm]string username)
         {
             var currentUsername = ((ClaimsIdentity)User.Identity).Claims.First(claim => claim.Type == "name").Value;
-            return Redirect($"http://localhost:5000/edit?name={currentUsername}&newName={username}");
+            //return Redirect($"http://localhost:5000/edit?name={currentUsername}&newName={username}");
+            return Redirect($"http://identityserver20190606022426.azurewebsites.net:80/edit?name={currentUsername}&newName={username}");
         }
     }
 }
