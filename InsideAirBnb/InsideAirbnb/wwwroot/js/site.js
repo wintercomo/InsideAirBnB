@@ -6,6 +6,7 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
 function setMapFilter(map) {
+    console.log("Fetching Data");
     var label = $('#map_filter :selected').parent().attr('label');
     var selectedValue = document.getElementById("map_filter").value;
     var onlyApartments = document.getElementById("apartmentFilterCheckbox").checked;
@@ -42,36 +43,9 @@ function setMapFilter(map) {
             ]
         }
     });
-    
-    //switch (label) {
-    //    case "review rating":
-    //        filterBy = "<=";
-    //        selectedValue = parseInt(selectedValue)
-    //        label = "review_rating"
-    //        mapFilters.push([filterBy, label, selectedValue])
-    //        break;
-    //    case "price":
-    //        if (selectedValue == "1000+") {
-    //            selectedValue = selectedValue.slice(0, selectedValue.length - 1);
-    //            filterBy = ">"
-    //        } else {
-    //            filterBy = "<="
-    //        }
-    //        selectedValue = parseInt(selectedValue)
-    //        mapFilters.push([filterBy, label, selectedValue])
-    //        break;
-    //    case undefined:
-    //        break;
-    //    default:
-    //        mapFilters.push([filterBy, label, selectedValue])
-    //        break;
-    //}
-    
 }
 function showTopHosts() {
-    var currentStyle = document.getElementById("topHostList").style.display;
-    console.log(currentStyle)
-    if (currentStyle == "block") {
+    if (document.getElementById("topHostList").style.display == "block") {
         document.getElementById("topHostList").style.display = "none"
     } else {
         document.getElementById("topHostList").style.display = "block"

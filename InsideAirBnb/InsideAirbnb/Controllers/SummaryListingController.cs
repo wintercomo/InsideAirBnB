@@ -16,12 +16,10 @@ namespace InsideAirbnb.Controllers
     public class SummaryListingController : Controller
     {
         private readonly IRepository<SummaryListings> sumListingRepo;
-        private readonly IRepository<Listings> listingsRepo;
 
-        public SummaryListingController(IRepository<SummaryListings> repository, IRepository<Listings> listingsRepo)
+        public SummaryListingController(IRepository<SummaryListings> repository)
         {
             this.sumListingRepo = repository;
-            this.listingsRepo = listingsRepo;
         }
         public static int GetMonthDifference(DateTime startDate, DateTime endDate)
         {
@@ -49,9 +47,9 @@ namespace InsideAirbnb.Controllers
                 {
                     type = "FeatureCollection",
                     features = features
+                        .Where(l => l.Price < maxPrice || maxPrice == 0)
                         .Where(listing => listing.Neighbourhood == neighbourhood || neighbourhood == null)
                         .Where(l => l.RoomType == "Entire home/apt" || !ApartmentsOnly)
-                        .Where(l => l.Price <= maxPrice || maxPrice == 0)
                         .Where(l => l.NumberOfReviews >= minReviews)
                         .Where(l => l.Availability365 > 60 || !onlyHighActive) // or is !onlyHighActive then = .Where(true)
                         .Where(l => l.CalculatedHostListingsCount > 1 || !onlyMultiListings)

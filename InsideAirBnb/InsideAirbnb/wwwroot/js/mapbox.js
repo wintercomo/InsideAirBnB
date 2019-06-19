@@ -41,32 +41,25 @@
             .addTo(map);
     };
     // Event listeners
-    var FilterApertmentsCheckbox = document.querySelector("input[name=filterApertmentsOnly]");
-    var onlyAvailabiltyCheckbox = document.querySelector("input[name=onlyAvailabiltyCheckbox]");
-    var maxPriceSlider = document.getElementById("multi");
-    var numberOfReviewsSlider = document.getElementById("numberOfReviewsSlider");
-    var onlyRecentCheckbox = document.getElementById("onlyRecentCheckbox");
-    maxPriceSlider.addEventListener('change', function () {
-        document.getElementById("maxPriceTag").innerHTML = maxPriceSlider.value;
+    document.getElementById("multi").addEventListener('change', function () {
+        document.getElementById("maxPriceTag").innerHTML = document.getElementById("multi").value;
         setMapFilter(map);
     });
-    numberOfReviewsSlider.addEventListener('change', function () {
-        document.getElementById("minReviewTag").innerHTML = numberOfReviewsSlider.value;
+    document.getElementById("numberOfReviewsSlider").addEventListener('change', function () {
+        document.getElementById("minReviewTag").innerHTML = document.getElementById("numberOfReviewsSlider").value;
         setMapFilter(map);
     });
-    FilterApertmentsCheckbox.addEventListener('change', function () {
+    document.querySelector("input[name=filterApertmentsOnly]").addEventListener('change', function () {
         setMapFilter(map);
     });
-    onlyRecentCheckbox.addEventListener('change', function () {
+    document.getElementById("onlyRecentCheckbox").addEventListener('change', function () {
         setMapFilter(map);
     });
-    onlyAvailabiltyCheckbox.addEventListener('change', function () {
+    document.querySelector("input[name=onlyAvailabiltyCheckbox]").addEventListener('change', function () {
         setMapFilter(map);
     });
     document.getElementById("map_filter").addEventListener("change", () => {
         setMapFilter(map);
-        
-        //map.addSource('locations_layer', { type: 'geojson', data: "/sum?neighbourhood=Centrum-Oost" });
     });
     document.getElementById("onlyMultiListingsPerHostCheckbox").addEventListener("change", () => {
         setMapFilter(map);
@@ -121,18 +114,10 @@
             var amountApartments = features.filter(feature => feature.properties.room_type == "Entire home/apt")
             var amountPrivateRooms = features.filter(feature => feature.properties.room_type == "Private room")
             var amountSharedRooms = features.filter(feature => feature.properties.room_type == "Shared room")
-            //amout makers availability
+            //amount makers availability
             UpdateUI(features, amountApartments, amountPrivateRooms, amountSharedRooms);
             createChart(map, amountApartments, amountPrivateRooms, amountSharedRooms);
             createAvailableCharts(map, features);
-            //var FilterApertmentsCheckbox = document.querySelector("input[name=filterApertmentsOnly]");
-            //var onlyAvailabiltyCheckbox = document.querySelector("input[name=onlyAvailabiltyCheckbox]");
-            //var onlyMultiListings = document.querySelector("input[name=onlyMultiListingsPerHostCheckbox]");
-            //let mapFilters = ["all"];
-            //if (FilterApertmentsCheckbox.checked) mapFilters.push(["==", "room_type", "Entire home/apt"]);
-            //if (onlyAvailabiltyCheckbox.checked) mapFilters.push(["==", "availabilityStatus", "HIGH"]);
-            //if (onlyMultiListings.checked) mapFilters.push([">", "calculated_host_listings_count", 1]);
-            //map.setFilter('locations_layer', mapFilters);
         });
     });
     

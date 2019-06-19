@@ -62,8 +62,8 @@ namespace InsideAirbnb
                     options.ClientId = "mvc";
                     options.ClientSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
                     options.RequireHttpsMetadata = false;
-                    //options.Authority = "http://identityserver20190606022426.azurewebsites.net:80/"; // Login url for hosting on azure
-                    options.Authority = "http://localhost:5000/"; // Login url for local testing / debugging
+                    options.Authority = "http://identityserver20190606022426.azurewebsites.net:80/"; // Login url for hosting on azure
+                    //options.Authority = "http://localhost:5000/"; // Login url for local testing / debugging
                     options.GetClaimsFromUserInfoEndpoint = true;
                     options.Scope.Add("roles");
                     options.ClaimActions.MapJsonKey("role", "role", "role");
@@ -98,6 +98,7 @@ namespace InsideAirbnb
             app.UseStaticFiles();
 
             app.UseCookiePolicy();
+            //Automatic migration for azure
             //var context = app.ApplicationServices.GetService<insideAirBnbV2Context>();
             //context.Database.Migrate();
             //applicationDbContext.Database.Migrate();

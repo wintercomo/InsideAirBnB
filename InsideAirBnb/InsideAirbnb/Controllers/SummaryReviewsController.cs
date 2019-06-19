@@ -1,6 +1,8 @@
 ﻿using InsideAirbnb.Models;
 using InsideAirbnb.Repositories;
+using InsideAirbnb.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,20 +22,21 @@ namespace InsideAirbnb.Controllers
         public async Task<IActionResult> TrendsData([FromQuery]string neighbourhood, [FromQuery]bool ApartmentsOnly, [FromQuery]int maxPrice, [FromQuery]int minReviews, [FromQuery]bool onlyHighActive, [FromQuery]bool onlyMultiListings, [FromQuery]bool onlyRecentBooked)
         {
             object geo = null;
+            if (RedisCacheService.GetInstance().KeyExists("Trends"))
+            {
+                geo = JsonConvert.DeserializeObject<object>(await RedisCacheService.GetInstance().StringGetAsync("Trends"));
+                return Ok(geo);
+            }
             try
             {
-                //return this.listings.OrderByDescending(i => i.CalculatedHostListingsCount).GroupBy(item => item.HostName).Select(listing => listing.First()).Take(20);
-
                 geo = sumReviewsRepository.GetAll()
                 .OrderBy(i => i.Date).GroupBy(item => item.Date).Distinct()
-                .Take(100)
                 .Select(item => { return new { x = item.First().Date, y = item.Count() }; });
+                RedisCacheService.GetInstance().StringSet("Trends", JsonConvert.SerializeObject(geo), TimeSpan.FromDays(1));
                 return Ok(geo);
-                //RedisCacheService.GetInstance().StringSet(filterString, JsonConvert.SerializeObject(geo), TimeSpan.FromDays(1));
             }
             catch (Exception err)
             {
-
                 return Ok(err);
             }
         }

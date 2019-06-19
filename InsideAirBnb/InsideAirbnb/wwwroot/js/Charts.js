@@ -1,8 +1,6 @@
 ﻿
 function createChart(map, amountApartments, amountPrivateRooms, amountSharedRooms) {
     if (map.areTilesLoaded()) {
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var availableChart = document.getElementById('availableChart').getContext('2d');
         var roomTypeData = {
             labels: ["Entire home/apt", "Private room", "Shared room"],
             datasets: [{
@@ -11,23 +9,13 @@ function createChart(map, amountApartments, amountPrivateRooms, amountSharedRoom
             }]
         }
         var availableData = {
-            labels: ["number of days availavle in year"],
+            labels: ["number of days available in year"],
             datasets: [{
-                data: [{
-                    x: 1,
-                    y:1
-                },{
-                    x: 2,
-                    y:2
-                },{
-                    x: 3,
-                    y:3
-                },
-                ],
+                data: [],
                 backgroundColor: ['#ec5242']
             }]
         }
-        new Chart(ctx, {
+        new Chart(document.getElementById('myChart').getContext('2d'), {
             type: 'horizontalBar',
             data: roomTypeData,
             options: {
@@ -37,9 +25,7 @@ function createChart(map, amountApartments, amountPrivateRooms, amountSharedRoom
                 },
             }
         });
-        
-
-        new Chart(availableChart, {
+        new Chart(document.getElementById('availableChart').getContext('2d'), {
             type: 'line',
             data: availableData,
             options: {
@@ -54,15 +40,10 @@ function createChart(map, amountApartments, amountPrivateRooms, amountSharedRoom
 
 function createAvailableCharts(map, features) {
     if (map.areTilesLoaded()) {
-        var amountHighAvailable = features.filter(feature => feature.properties.availabilityStatus == "HIGH");
-        var amountLowAvailable = features.filter(feature => feature.properties.availabilityStatus == "LOW");
-        var amountMultiListings = features.filter(feature => feature.properties.calculated_host_listings_count > 1);
-        var availablePieChart = document.getElementById('availablePieChart').getContext('2d');
-        var listingsPerHostChart = document.getElementById('listingsPerHostChart').getContext('2d');
         var roomTypeData = {
             labels: ["HIGH", "LOW"],
             datasets: [{
-                data: [amountHighAvailable.length, amountLowAvailable.length],
+                data: [features.filter(feature => feature.properties.availabilityStatus == "HIGH").length, features.filter(feature => feature.properties.availabilityStatus == "LOW").length],
                 backgroundColor: ['#B4B4B4', '#CCCCCC']
             }]
         }
@@ -70,19 +51,19 @@ function createAvailableCharts(map, features) {
             labels: ["1", "2", '3', '4', '5', '6', '7', '8', '10'],
             datasets: [{
                 data: [features.filter(feature => feature.properties.calculated_host_listings_count === 1).length,
-                    features.filter(feature => feature.properties.calculated_host_listings_count === 2).length,
-                    features.filter(feature => feature.properties.calculated_host_listings_count === 3).length,
-                    features.filter(feature => feature.properties.calculated_host_listings_count === 4).length,
-                    features.filter(feature => feature.properties.calculated_host_listings_count === 5).length,
-                    features.filter(feature => feature.properties.calculated_host_listings_count === 6).length,
-                    features.filter(feature => feature.properties.calculated_host_listings_count === 7).length,
-                    features.filter(feature => feature.properties.calculated_host_listings_count === 8).length,
-                    features.filter(feature => feature.properties.calculated_host_listings_count === 9).length,
-                    features.filter(feature => feature.properties.calculated_host_listings_count === 10).length,
+                features.filter(feature => feature.properties.calculated_host_listings_count === 2).length,
+                features.filter(feature => feature.properties.calculated_host_listings_count === 3).length,
+                features.filter(feature => feature.properties.calculated_host_listings_count === 4).length,
+                features.filter(feature => feature.properties.calculated_host_listings_count === 5).length,
+                features.filter(feature => feature.properties.calculated_host_listings_count === 6).length,
+                features.filter(feature => feature.properties.calculated_host_listings_count === 7).length,
+                features.filter(feature => feature.properties.calculated_host_listings_count === 8).length,
+                features.filter(feature => feature.properties.calculated_host_listings_count === 9).length,
+                features.filter(feature => feature.properties.calculated_host_listings_count === 10).length,
                 ],
             }]
         }
-        new Chart(listingsPerHostChart, {
+        new Chart(document.getElementById('listingsPerHostChart').getContext('2d'), {
             type: 'bar',
             data: listingsDataSet,
             options: {
@@ -92,7 +73,7 @@ function createAvailableCharts(map, features) {
                 },
             }
         });
-        var myChart = new Chart(availablePieChart, {
+        new Chart(document.getElementById('availablePieChart').getContext('2d'), {
             type: 'doughnut',
             data: roomTypeData,
             options: {
@@ -103,3 +84,4 @@ function createAvailableCharts(map, features) {
             }
         });
     }
+}

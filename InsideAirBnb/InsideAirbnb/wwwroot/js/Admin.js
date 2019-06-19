@@ -1,4 +1,5 @@
 ﻿//JS for admin page
+console.log("Loaded admin JS");
 var availableData = {
     labels: null,
     datasets: [{
@@ -24,10 +25,28 @@ function createTrendsChart() {
         type: 'line',
         data: availableData,
         options: {
+            title: {
+                display: true,
+                text: 'Trends'
+            },
             maintainAspectRatio: false,
             legend: {
                 display: false
             },
+            scales: {
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Ammount of reviews'
+                    }
+                }],
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Date'
+                    }
+                }]
+            }
         }
     });
 };
