@@ -103,4 +103,3 @@ function createAvailableCharts(map, features) {
             }
         });
     }
-}

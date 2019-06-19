@@ -33,10 +33,10 @@ namespace IdentityServer
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("IdentityServerDB"))); // Database for azure
             //services.AddDbContext<ApplicationDbContext>(options =>
-              //  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // Database for local testing /debugging
+              //  options.UseSqlServer(Configuration.GetConnectionString("IdentityServerDB"))); // Database for azure
+            services.AddDbContext<ApplicationDbContext>(options =>
+              options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // Database for local testing /debugging
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -117,8 +117,10 @@ namespace IdentityServer
             //Assign Admin role to the main User here we have given our newly registered 
             //login id for Admin management
             ApplicationUser user = await _userManager.FindByNameAsync("wintercomo");
-            
-
+            if (user != null)
+            {
+                await _userManager.AddToRoleAsync(user, "Admin");
+            }
         }
 
     }

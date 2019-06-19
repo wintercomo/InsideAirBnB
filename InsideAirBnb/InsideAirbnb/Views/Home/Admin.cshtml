@@ -1,6 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Admin panel";
 }
+@section Scripts {
+    <script src="~/js/Admin.js" asp-append-version="true"></script>
+}
 <h1>@ViewData["Title"]</h1>
 
 <p>This page can only be seen if you are an admin</p>
+
+<div class="row">
+    <canvas id="trendsGraph"></canvas>
+</div>
